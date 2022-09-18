@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="DELETE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_881767_splitwise.getMembersOfGroup</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description/>
+        <name>getMembersOfGroup</name>
+        <script><![CDATA[function getMembersOfGroup(){
+	var record= new GlideRecord('x_881767_splitwise_splitwise_user');
+	var group = g_form.getValue('Group');
+	alert('you are working with group '+group);
+	console.log("dhanya"+group);
+}]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-09-16 17:25:28</sys_created_on>
+        <sys_id>ffe81060474a1110e292f2e7536d4372</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>getMembersOfGroup</sys_name>
+        <sys_package display_value="Splitwise" source="x_881767_splitwise">534b06d447021110e292f2e7536d438f</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Splitwise">534b06d447021110e292f2e7536d438f</sys_scope>
+        <sys_update_name>sys_script_include_ffe81060474a1110e292f2e7536d4372</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-09-16 17:28:53</sys_updated_on>
+    </sys_script_include>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Splitwise">534b06d447021110e292f2e7536d438f</application>
+        <file_path/>
+        <instance_id>f9468166dbbfd3808264f70fbf9619e4</instance_id>
+        <instance_name>dev70031</instance_name>
+        <name>sys_script_include_ffe81060474a1110e292f2e7536d4372</name>
+        <payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="sys_script_include"&gt;&lt;sys_script_include action="INSERT_OR_UPDATE"&gt;&lt;access&gt;package_private&lt;/access&gt;&lt;active&gt;true&lt;/active&gt;&lt;api_name&gt;x_881767_splitwise.getMembersOfGroup&lt;/api_name&gt;&lt;caller_access/&gt;&lt;client_callable&gt;false&lt;/client_callable&gt;&lt;description/&gt;&lt;name&gt;getMembersOfGroup&lt;/name&gt;&lt;script&gt;&lt;![CDATA[function getMembersOfGroup(){
+	var record= new GlideRecord('x_881767_splitwise_splitwise_user');
+	var group = g_form.getValue('Group');
+	alert('you are working with group '+group);
+	console.log("dhanya"+group);
+}]]&gt;&lt;/script&gt;&lt;sys_class_name&gt;sys_script_include&lt;/sys_class_name&gt;&lt;sys_created_by&gt;admin&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2022-09-16 17:25:28&lt;/sys_created_on&gt;&lt;sys_id&gt;ffe81060474a1110e292f2e7536d4372&lt;/sys_id&gt;&lt;sys_mod_count&gt;1&lt;/sys_mod_count&gt;&lt;sys_name&gt;getMembersOfGroup&lt;/sys_name&gt;&lt;sys_package display_value="Splitwise" source="x_881767_splitwise"&gt;534b06d447021110e292f2e7536d438f&lt;/sys_package&gt;&lt;sys_policy&gt;read&lt;/sys_policy&gt;&lt;sys_scope display_value="Splitwise"&gt;534b06d447021110e292f2e7536d438f&lt;/sys_scope&gt;&lt;sys_update_name&gt;sys_script_include_ffe81060474a1110e292f2e7536d4372&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;admin&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2022-09-16 17:28:53&lt;/sys_updated_on&gt;&lt;/sys_script_include&gt;&lt;/record_update&gt;</payload>
+        <payload_hash>1604097038</payload_hash>
+        <record_name>getMembersOfGroup</record_name>
+        <reverted_from/>
+        <source>934b06d447021110e292f2e7536d4391</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-09-16 17:28:53</sys_created_on>
+        <sys_id>eb3e5864474a1110e292f2e7536d43c2</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>18347589e2c0000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-09-16 17:28:53</sys_updated_on>
+        <type>Script Include</type>
+        <update_guid>273e5864fb4a11104f87e6e404ed7dc2</update_guid>
+        <update_guid_history>273e5864fb4a11104f87e6e404ed7dc2:1604097038,657dd0a0ec4a1110650d96fef4559959:438456614</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-09-16 17:33:25</sys_created_on>
+        <sys_db_object display_value="" name="sys_script_include">sys_script_include</sys_db_object>
+        <sys_id>2c79b9e01d304ed0af3b2cf0cac51290</sys_id>
+        <sys_metadata>ffe81060474a1110e292f2e7536d4372</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>getMembersOfGroup</sys_name>
+        <sys_package display_value="Splitwise" source="x_881767_splitwise">534b06d447021110e292f2e7536d438f</sys_package>
+        <sys_parent/>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Splitwise">534b06d447021110e292f2e7536d438f</sys_scope>
+        <sys_scope_delete display_value="">18b1ccc3dfbf4b7d876f6c0d8952f371</sys_scope_delete>
+        <sys_update_name>sys_script_include_ffe81060474a1110e292f2e7536d4372</sys_update_name>
+        <sys_update_version display_value="sys_script_include_ffe81060474a1110e292f2e7536d4372">eb3e5864474a1110e292f2e7536d43c2</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-09-16 17:33:25</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

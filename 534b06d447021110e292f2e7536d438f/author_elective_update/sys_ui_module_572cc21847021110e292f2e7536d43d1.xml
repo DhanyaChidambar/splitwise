@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_ui_module">
+    <sys_ui_module action="DELETE">
+        <active>true</active>
+        <application/>
+        <filter/>
+        <name>Expense Groups</name>
+        <order/>
+        <path/>
+        <path_relative_to_root>false</path_relative_to_root>
+        <roles>x_881767_splitwise.expense_group_user</roles>
+        <sys_class_name>sys_ui_module</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-09-16 06:50:43</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>572cc21847021110e292f2e7536d43d1</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Expense Groups</sys_name>
+        <sys_package display_value="Splitwise" source="x_881767_splitwise">534b06d447021110e292f2e7536d438f</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Splitwise">534b06d447021110e292f2e7536d438f</sys_scope>
+        <sys_update_name>sys_ui_module_572cc21847021110e292f2e7536d43d1</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-09-16 06:50:43</sys_updated_on>
+        <table>x_881767_splitwise_expense_group</table>
+        <uncancelable>false</uncancelable>
+        <view_name/>
+    </sys_ui_module>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Splitwise">534b06d447021110e292f2e7536d438f</application>
+        <file_path/>
+        <instance_id>f9468166dbbfd3808264f70fbf9619e4</instance_id>
+        <instance_name>dev70031</instance_name>
+        <name>sys_ui_module_572cc21847021110e292f2e7536d43d1</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_ui_module"><sys_ui_module action="INSERT_OR_UPDATE"><active>true</active><application/><filter/><name>Expense Groups</name><order/><path/><path_relative_to_root>false</path_relative_to_root><roles>x_881767_splitwise.expense_group_user</roles><sys_class_name>sys_ui_module</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2022-09-16 06:50:43</sys_created_on><sys_domain>global</sys_domain><sys_domain_path>/</sys_domain_path><sys_id>572cc21847021110e292f2e7536d43d1</sys_id><sys_mod_count>0</sys_mod_count><sys_name>Expense Groups</sys_name><sys_package display_value="Splitwise" source="x_881767_splitwise">534b06d447021110e292f2e7536d438f</sys_package><sys_policy/><sys_scope display_value="Splitwise">534b06d447021110e292f2e7536d438f</sys_scope><sys_update_name>sys_ui_module_572cc21847021110e292f2e7536d43d1</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2022-09-16 06:50:43</sys_updated_on><table>x_881767_splitwise_expense_group</table><uncancelable>false</uncancelable><view_name/></sys_ui_module></record_update>]]></payload>
+        <payload_hash>2069925972</payload_hash>
+        <record_name>Expense Groups</record_name>
+        <reverted_from/>
+        <source>934b06d447021110e292f2e7536d4391</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-09-16 06:54:39</sys_created_on>
+        <sys_id>3c1d865847021110e292f2e7536d4321</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>1834513f4a40000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-09-16 06:54:39</sys_updated_on>
+        <type>Module</type>
+        <update_guid>9f2cc218840211109b94de68c92f53d3</update_guid>
+        <update_guid_history>9f2cc218840211109b94de68c92f53d3:-1546268306,9f2cc218840211109b94de68c92f53d3:-1546268306</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-09-16 06:54:47</sys_created_on>
+        <sys_db_object display_value="" name="sys_ui_module">sys_ui_module</sys_db_object>
+        <sys_id>5d602d5fe57e44f8ba9356644b5c0021</sys_id>
+        <sys_metadata>572cc21847021110e292f2e7536d43d1</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Expense Groups</sys_name>
+        <sys_package display_value="Splitwise" source="x_881767_splitwise">534b06d447021110e292f2e7536d438f</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Splitwise">534b06d447021110e292f2e7536d438f</sys_scope>
+        <sys_scope_delete display_value="">18b1ccc3dfbf4b7d876f6c0d8952f371</sys_scope_delete>
+        <sys_update_name>sys_ui_module_572cc21847021110e292f2e7536d43d1</sys_update_name>
+        <sys_update_version display_value="sys_ui_module_572cc21847021110e292f2e7536d43d1">3c1d865847021110e292f2e7536d4321</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-09-16 06:54:47</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

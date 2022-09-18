@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_embedded_help_role">
+    <sys_embedded_help_role action="INSERT_OR_UPDATE">
+        <order>1000</order>
+        <role display_value="x_881767_splitwise.expense_group_user" name="x_881767_splitwise.expense_group_user">432c0e9447021110e292f2e7536d43db</role>
+        <sys_class_name>sys_embedded_help_role</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-09-16 06:50:42</sys_created_on>
+        <sys_id>4f2c0e9447021110e292f2e7536d43dd</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>432c0e9447021110e292f2e7536d43db</sys_name>
+        <sys_package display_value="Splitwise" source="x_881767_splitwise">534b06d447021110e292f2e7536d438f</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Splitwise">534b06d447021110e292f2e7536d438f</sys_scope>
+        <sys_update_name>sys_embedded_help_role_4f2c0e9447021110e292f2e7536d43dd</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-09-16 06:50:42</sys_updated_on>
+    </sys_embedded_help_role>
+</record_update>

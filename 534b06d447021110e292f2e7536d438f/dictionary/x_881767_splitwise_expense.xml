@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Expense" max_length="40" name="x_881767_splitwise_expense" sizeclass="0" type="collection">
+        <element label="Amount" max_length="40" name="amount" type="integer"/>
+        <element label="Group" max_length="32" name="group" reference="x_881767_splitwise_expense_group" type="reference"/>
+        <element choice_field="paid_by" choice_table="x_881767_splitwise_expense" dependent="group" dependent_on_field="group" display="true" label="Paid By" mandatory="true" max_length="32" name="paid_by" reference="x_881767_splitwise_user_group" reference_qual="javascript:&quot;group=&quot;+current.group" type="reference" use_dependent_field="true" use_reference_qualifier="advanced"/>
+        <element default="true" label="divide equally among members?" max_length="40" name="u_divide_equally" type="boolean"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Paid By" max_length="40" name="u_paid_by" type="string">
+            <choice/>
+        </element>
+        <index name="index">
+            <element name="paid_by"/>
+        </index>
+        <index name="index2">
+            <element name="group"/>
+        </index>
+    </element>
+</database>

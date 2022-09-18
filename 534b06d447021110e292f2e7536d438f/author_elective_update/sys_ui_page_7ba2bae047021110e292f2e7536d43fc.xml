@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_page">
+    <sys_ui_page action="DELETE">
+        <category>general</category>
+        <client_script/>
+        <description/>
+        <direct>false</direct>
+        <endpoint>x_881767_splitwise_Expense list.do</endpoint>
+        <html><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
+<j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
+	<input type="checkbox">hello</input>
+</j:jelly>]]></html>
+        <name>Expense list</name>
+        <processing_script/>
+        <sys_class_name>sys_ui_page</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-09-17 06:43:28</sys_created_on>
+        <sys_id>7ba2bae047021110e292f2e7536d43fc</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Expense list</sys_name>
+        <sys_package display_value="Splitwise" source="x_881767_splitwise">534b06d447021110e292f2e7536d438f</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Splitwise">534b06d447021110e292f2e7536d438f</sys_scope>
+        <sys_update_name>sys_ui_page_7ba2bae047021110e292f2e7536d43fc</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-09-17 06:43:28</sys_updated_on>
+    </sys_ui_page>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Splitwise">534b06d447021110e292f2e7536d438f</application>
+        <file_path/>
+        <instance_id>f9468166dbbfd3808264f70fbf9619e4</instance_id>
+        <instance_name>dev70031</instance_name>
+        <name>sys_ui_page_7ba2bae047021110e292f2e7536d43fc</name>
+        <payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="sys_ui_page"&gt;&lt;sys_ui_page action="INSERT_OR_UPDATE"&gt;&lt;category&gt;general&lt;/category&gt;&lt;client_script/&gt;&lt;description/&gt;&lt;direct&gt;false&lt;/direct&gt;&lt;endpoint&gt;x_881767_splitwise_Expense list.do&lt;/endpoint&gt;&lt;html&gt;&lt;![CDATA[&lt;?xml version="1.0" encoding="utf-8" ?&gt;
+&lt;j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null"&gt;
+	&lt;input type="checkbox"&gt;hello&lt;/input&gt;
+&lt;/j:jelly&gt;]]&gt;&lt;/html&gt;&lt;name&gt;Expense list&lt;/name&gt;&lt;processing_script/&gt;&lt;sys_class_name&gt;sys_ui_page&lt;/sys_class_name&gt;&lt;sys_created_by&gt;admin&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2022-09-17 06:43:28&lt;/sys_created_on&gt;&lt;sys_id&gt;7ba2bae047021110e292f2e7536d43fc&lt;/sys_id&gt;&lt;sys_mod_count&gt;0&lt;/sys_mod_count&gt;&lt;sys_name&gt;Expense list&lt;/sys_name&gt;&lt;sys_package display_value="Splitwise" source="x_881767_splitwise"&gt;534b06d447021110e292f2e7536d438f&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="Splitwise"&gt;534b06d447021110e292f2e7536d438f&lt;/sys_scope&gt;&lt;sys_update_name&gt;sys_ui_page_7ba2bae047021110e292f2e7536d43fc&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;admin&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2022-09-17 06:43:28&lt;/sys_updated_on&gt;&lt;/sys_ui_page&gt;&lt;/record_update&gt;</payload>
+        <payload_hash>-2039009150</payload_hash>
+        <record_name>Expense list</record_name>
+        <reverted_from/>
+        <source>934b06d447021110e292f2e7536d4391</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-09-17 06:43:28</sys_created_on>
+        <sys_id>3a1493a447021110e292f2e7536d4385</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>1834a3013430000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-09-17 06:43:28</sys_updated_on>
+        <type>UI Page</type>
+        <update_guid>321493a4eb0211103ea76f447c2c6485</update_guid>
+        <update_guid_history>321493a4eb0211103ea76f447c2c6485:-2039009150</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-09-17 06:45:19</sys_created_on>
+        <sys_db_object display_value="" name="sys_ui_page">sys_ui_page</sys_db_object>
+        <sys_id>0136b93c0c484156852eb3dbc3bee9a4</sys_id>
+        <sys_metadata>7ba2bae047021110e292f2e7536d43fc</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Expense list</sys_name>
+        <sys_package display_value="Splitwise" source="x_881767_splitwise">534b06d447021110e292f2e7536d438f</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Splitwise">534b06d447021110e292f2e7536d438f</sys_scope>
+        <sys_scope_delete display_value="">18b1ccc3dfbf4b7d876f6c0d8952f371</sys_scope_delete>
+        <sys_update_name>sys_ui_page_7ba2bae047021110e292f2e7536d43fc</sys_update_name>
+        <sys_update_version display_value="sys_ui_page_7ba2bae047021110e292f2e7536d43fc">3a1493a447021110e292f2e7536d4385</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-09-17 06:45:19</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>
