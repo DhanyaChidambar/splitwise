@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_dictionary action="DELETE" element="u_paid_by" table="x_881767_splitwise_expense">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>edge_encryption_enabled=true</attributes>
+        <audit>false</audit>
+        <calculation/>
+        <choice>1</choice>
+        <choice_field/>
+        <choice_table/>
+        <column_label>Paid By</column_label>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>u_paid_by</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <internal_type display_value="String">string</internal_type>
+        <mandatory>false</mandatory>
+        <max_length>40</max_length>
+        <name>x_881767_splitwise_expense</name>
+        <next_element/>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_dictionary</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-09-18 17:20:25</sys_created_on>
+        <sys_id>037f6a85478e5110e292f2e7536d43b3</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Paid By</sys_name>
+        <sys_package display_value="Splitwise" source="x_881767_splitwise">534b06d447021110e292f2e7536d438f</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Splitwise">534b06d447021110e292f2e7536d438f</sys_scope>
+        <sys_update_name>sys_dictionary_x_881767_splitwise_expense_u_paid_by</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-09-18 17:20:25</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_dictionary>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Splitwise">534b06d447021110e292f2e7536d438f</application>
+        <file_path/>
+        <instance_id>f9468166dbbfd3808264f70fbf9619e4</instance_id>
+        <instance_name>dev70031</instance_name>
+        <name>sys_dictionary_x_881767_splitwise_expense_u_paid_by</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update><sys_dictionary action="INSERT_OR_UPDATE" element="u_paid_by" table="x_881767_splitwise_expense"><active>true</active><array>false</array><array_denormalized>false</array_denormalized><attributes>edge_encryption_enabled=true</attributes><audit>false</audit><calculation/><choice>1</choice><choice_field/><choice_table/><column_label>Paid By</column_label><comments/><create_roles/><default_value/><defaultsort/><delete_roles/><dependent/><dependent_on_field/><display>false</display><dynamic_creation>false</dynamic_creation><dynamic_creation_script/><dynamic_default_value/><dynamic_ref_qual/><element>u_paid_by</element><element_reference>false</element_reference><foreign_database/><function_definition/><function_field>false</function_field><internal_type display_value="String">string</internal_type><mandatory>false</mandatory><max_length>40</max_length><name>x_881767_splitwise_expense</name><next_element/><primary>false</primary><read_only>false</read_only><read_roles/><reference/><reference_cascade_rule/><reference_floats>false</reference_floats><reference_key/><reference_qual/><reference_qual_condition/><reference_type/><sizeclass/><spell_check>false</spell_check><staged>false</staged><sys_class_name>sys_dictionary</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2022-09-18 17:20:25</sys_created_on><sys_id>037f6a85478e5110e292f2e7536d43b3</sys_id><sys_mod_count>0</sys_mod_count><sys_name>Paid By</sys_name><sys_package display_value="Splitwise" source="x_881767_splitwise">534b06d447021110e292f2e7536d438f</sys_package><sys_policy/><sys_scope display_value="Splitwise">534b06d447021110e292f2e7536d438f</sys_scope><sys_update_name>sys_dictionary_x_881767_splitwise_expense_u_paid_by</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2022-09-18 17:20:25</sys_updated_on><table_reference>false</table_reference><text_index>false</text_index><unique>false</unique><use_dependent_field>false</use_dependent_field><use_dynamic_default>false</use_dynamic_default><use_reference_qualifier>simple</use_reference_qualifier><virtual>false</virtual><widget/><write_roles/><xml_view>false</xml_view></sys_dictionary></record_update>]]></payload>
+        <payload_hash>697516159</payload_hash>
+        <record_name>Expense.Paid By</record_name>
+        <reverted_from/>
+        <source>934b06d447021110e292f2e7536d4391</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-09-18 17:20:26</sys_created_on>
+        <sys_id>c37f6a85478e5110e292f2e7536d43d2</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>183519d982a0000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-09-18 17:20:26</sys_updated_on>
+        <type>Dictionary</type>
+        <update_guid>8b7f6a859c8e511019efd4905bb701d1</update_guid>
+        <update_guid_history>8b7f6a859c8e511019efd4905bb701d1:697516159,2b0162493d4e51109f9b4aeacc1f1a79:-1646925180,cdeede85e54e5110c17f4b397b2452f9:-844834864,e62e9285594e51105bbd26e242c122a7:1189685494,3fd3a58d674a51105d36ff9aea9252f2:2048833464,0583218dec4a5110c889df22dcfd5b13:1354402333,c983218d294a511086b700c0a6a8cd06:-1501629023,80ee94492e465110ffefcb69f0c61241:-150672155,0b6e5c09434651100ffce1bf76b19554:1069761817,2ffc50c5f2465110cee98631526658a5:1350384802,64c7d4b49c8611107d284f7870e586dc:-8701944,98c7d4b495861110ed637052e5c61bc7:697516159</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-09-18 18:46:16</sys_created_on>
+        <sys_db_object display_value="" name="sys_dictionary">sys_dictionary</sys_db_object>
+        <sys_id>16cc8f688dd746dc8281d8d2c58181e9</sys_id>
+        <sys_metadata>037f6a85478e5110e292f2e7536d43b3</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Paid By</sys_name>
+        <sys_package display_value="Splitwise" source="x_881767_splitwise">534b06d447021110e292f2e7536d438f</sys_package>
+        <sys_parent display_value="Expense">081f584947465110e292f2e7536d433b</sys_parent>
+        <sys_policy/>
+        <sys_scope display_value="Splitwise">534b06d447021110e292f2e7536d438f</sys_scope>
+        <sys_scope_delete display_value="">18b1ccc3dfbf4b7d876f6c0d8952f371</sys_scope_delete>
+        <sys_update_name>sys_dictionary_x_881767_splitwise_expense_u_paid_by</sys_update_name>
+        <sys_update_version display_value="sys_dictionary_x_881767_splitwise_expense_u_paid_by">c37f6a85478e5110e292f2e7536d43d2</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-09-18 18:46:16</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>
