@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_script">
+    <sys_script action="INSERT_OR_UPDATE">
+        <abort_action>false</abort_action>
+        <access>package_private</access>
+        <action_delete>false</action_delete>
+        <action_insert>false</action_insert>
+        <action_query>false</action_query>
+        <action_update>true</action_update>
+        <active>true</active>
+        <add_message>false</add_message>
+        <advanced>true</advanced>
+        <change_fields>false</change_fields>
+        <client_callable>false</client_callable>
+        <collection>x_881767_splitwise_expense</collection>
+        <condition/>
+        <description/>
+        <execute_function>false</execute_function>
+        <filter_condition/>
+        <is_rest>false</is_rest>
+        <message/>
+        <name>update user-expense on update expense</name>
+        <order>100</order>
+        <priority>100</priority>
+        <rest_method/>
+        <rest_method_text/>
+        <rest_service/>
+        <rest_service_text/>
+        <rest_variables/>
+        <role_conditions/>
+        <script><![CDATA[(function executeRule(current, previous /*null when async*/) {
+	var total = current.getValue('amount');
+	gs.info("divide equally "+current.getValue('u_divide_equally')+" "+typeof current.getValue('u_divide_equally'));
+	if(current.getValue('u_divide_equally')=="0"){
+		gs.info("Dividing unequally");
+		var allMembers=current.getValue('u_user_share_pair').split(",");
+		var prevMembers = previous.getValue('u_user_share_pair');
+		if(prevMembers){
+			prevMembers=prevMembers.split(",");
+		}else{
+			prevMembers = [];
+		}
+		gs.info('members '+allMembers.length);
+		var each = total/(allMembers.length);
+		for(var i=0;i<allMembers.length;i++){
+			if(prevMembers.indexOf(allMembers[i])==-1){
+				var ex_grp=new GlideRecord('x_881767_splitwise_user_expense');
+				ex_grp.expense=current.getValue('sys_id');
+				ex_grp.share=each;
+				ex_grp.group=current.getValue('group');
+				ex_grp.user=allMembers[i];
+				ex_grp.u_balance=0-each;
+				gs.info("added all the values");
+				ex_grp.insert();
+			}else{
+				var ex_grp=new GlideRecord('x_881767_splitwise_user_expense');
+				ex_grp.addQuery('expense',current.getValue('sys_id'));
+				ex_grp.addQuery('user',allMembers[i]);
+				ex_grp.query();
+				if(ex_grp.next()){
+					ex_grp.share=each;
+					ex_grp.u_balance=ex_grp.getValue('spent')-each;
+					ex_grp.update();
+					prevMembers.splice(prevMembers.indexOf(allMembers[i]),1);	
+				}
+			}
+
+		}
+		for(var i=0;i<prevMembers.length;i++){
+			var ex_grp=new GlideRecord('x_881767_splitwise_user_expense');
+			ex_grp.addQuery('expense',current.getValue('sys_id'));
+			ex_grp.addQuery('user',"=",prevMembers[i]);
+			ex_grp.query();
+			if(ex_grp.next()){
+				gs.info("found match for removed user"+ ex_grp.expense);
+				ex_grp.deleteRecord();
+			}
+		}
+	}
+	else{
+		gs.info("Dividing equally");
+		//get the user entry based on group
+		var ug=new GlideRecord('x_881767_splitwise_user_group');
+		ug.addQuery('group',"=",current.getValue('group'));
+		ug.query();
+		var each = total/ug.getRowCount();
+		gs.info("total members "+ug.getRowCount());
+
+		//get the current entry from user-expense assoc
+		var ex_grp=new GlideRecord('x_881767_splitwise_user_expense');
+		ex_grp.addQuery('expense','=',current.getValue('sys_id'));
+		ex_grp.query();
+		var prev=[];
+		while(ex_grp.next()){
+			ex_grp.share = each;
+			ex_grp.update();
+			prev.push(ex_grp.getValue('user'));
+		}
+		var involvedMembers = prev;
+		while(ug.next()){
+			gs.info("Got the group "+ug.getValue('group'));
+			var member=ug.getValue('sys_id');
+			gs.info('current member '+member);
+			if(prev.indexOf(member)==-1){
+
+				ex_grp.expense=current.getValue('sys_id');
+				ex_grp.share=each;
+				ex_grp.group=ug.getValue('group');
+				ex_grp.user=member;
+				involvedMembers.push(member.toString());
+				gs.info("added all the values");
+				ex_grp.insert();
+			}
+		}
+		gs.info("current members "+involvedMembers);
+		current.u_user_share_pair=involvedMembers.toString();
+		current.update();
+	}
+	var expense = new GlideRecord('x_881767_splitwise_user_expense');
+	expense.addQuery('user.sys_id='+current.getValue('paid_by'));
+	expense.addQuery('expense.sys_id='+current.getValue('sys_id'));
+	expense.query();
+	if(expense.next()){
+		expense.setValue('spent',current.getValue('amount'));
+		expense.setValue('u_balance',current.getValue('amount')-expense.getValue('share'));
+		expense.update();
+	}else{
+		var ex_grp=new GlideRecord('x_881767_splitwise_user_expense');
+		ex_grp.expense=current.getValue('sys_id');
+
+		ex_grp.group=current.getValue('group');
+
+		ex_grp.user=current.getValue('paid_by');
+		ex_grp.share=0;
+		ex_grp.spent=current.getValue('amount');
+		ex_grp.u_balance=current.getValue('amount');
+		ex_grp.insert();
+	}
+	if(current.getValue('paid_by')!=previous.getValue('paid_by')){
+			var preExpense = new GlideRecord('x_881767_splitwise_user_expense');
+			preExpense.addQuery('user.sys_id='+previous.getValue('paid_by'));
+			preExpense.addQuery('expense.sys_id='+current.getValue('sys_id'));
+			preExpense.query();
+			if(preExpense.next()){
+				if(preExpense.getValue('share')==0){
+					preExpense.deleteRecord();
+				}else{
+					preExpense.setValue('spent',0);
+					preExpense.update();
+				}
+			}
+		}
+})(current, previous);]]></script>
+        <sys_class_name>sys_script</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-09-21 07:27:06</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>fdf3cc4e47065110e292f2e7536d4348</sys_id>
+        <sys_mod_count>20</sys_mod_count>
+        <sys_name>update user-expense on update expense</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Splitwise" source="x_881767_splitwise">534b06d447021110e292f2e7536d438f</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Splitwise">534b06d447021110e292f2e7536d438f</sys_scope>
+        <sys_update_name>sys_script_fdf3cc4e47065110e292f2e7536d4348</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-09-26 07:18:14</sys_updated_on>
+        <template/>
+        <when>after</when>
+    </sys_script>
+    <sys_translated_text action="delete_multiple" query="documentkey=fdf3cc4e47065110e292f2e7536d4348"/>
+</record_update>

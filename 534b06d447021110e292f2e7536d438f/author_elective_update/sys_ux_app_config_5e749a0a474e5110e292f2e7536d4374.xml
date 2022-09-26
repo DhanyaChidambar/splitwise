@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ux_app_config">
+    <sys_ux_app_config action="DELETE">
+        <active>true</active>
+        <custom_icon/>
+        <default_route_type/>
+        <description/>
+        <encode_query_string>false</encode_query_string>
+        <icon/>
+        <landing_path>home</landing_path>
+        <name>splitwise home</name>
+        <prefetch_limits/>
+        <sys_class_name>sys_ux_app_config</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-09-21 17:56:19</sys_created_on>
+        <sys_id>5e749a0a474e5110e292f2e7536d4374</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>splitwise home</sys_name>
+        <sys_package display_value="Splitwise" source="x_881767_splitwise">534b06d447021110e292f2e7536d438f</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Splitwise">534b06d447021110e292f2e7536d438f</sys_scope>
+        <sys_update_name>sys_ux_app_config_5e749a0a474e5110e292f2e7536d4374</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-09-21 17:56:19</sys_updated_on>
+    </sys_ux_app_config>
+    <sys_translated_text action="DELETE" query="documentkey=5e749a0a474e5110e292f2e7536d4374"/>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Splitwise">534b06d447021110e292f2e7536d438f</application>
+        <file_path/>
+        <instance_id>f9468166dbbfd3808264f70fbf9619e4</instance_id>
+        <instance_name>dev70031</instance_name>
+        <name>sys_ux_app_config_5e749a0a474e5110e292f2e7536d4374</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ux_app_config"><sys_ux_app_config action="INSERT_OR_UPDATE"><active>true</active><custom_icon/><default_route_type/><description/><encode_query_string>false</encode_query_string><icon/><landing_path>home</landing_path><name>splitwise home</name><prefetch_limits/><sys_class_name>sys_ux_app_config</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2022-09-21 17:56:19</sys_created_on><sys_id>5e749a0a474e5110e292f2e7536d4374</sys_id><sys_mod_count>0</sys_mod_count><sys_name>splitwise home</sys_name><sys_package display_value="Splitwise" source="x_881767_splitwise">534b06d447021110e292f2e7536d438f</sys_package><sys_policy/><sys_scope display_value="Splitwise">534b06d447021110e292f2e7536d438f</sys_scope><sys_update_name>sys_ux_app_config_5e749a0a474e5110e292f2e7536d4374</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2022-09-21 17:56:19</sys_updated_on></sys_ux_app_config><sys_translated_text action="delete_multiple" query="documentkey=5e749a0a474e5110e292f2e7536d4374"/></record_update>]]></payload>
+        <payload_hash>1688694075</payload_hash>
+        <record_name>splitwise home</record_name>
+        <reverted_from/>
+        <source>66dff24547ce5110e292f2e7536d43e0</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-09-21 17:56:19</sys_created_on>
+        <sys_id>9a749a0a474e5110e292f2e7536d4376</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>1836131897a0000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-09-21 17:56:19</sys_updated_on>
+        <type>UX App Configuration</type>
+        <update_guid>d2749a0aea4e51104d886d008447dc76</update_guid>
+        <update_guid_history>d2749a0aea4e51104d886d008447dc76:1688694075</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-09-22 05:30:20</sys_created_on>
+        <sys_db_object display_value="" name="sys_ux_app_config">sys_ux_app_config</sys_db_object>
+        <sys_id>5e867587ee4747e2a8fdc9b5f037ce64</sys_id>
+        <sys_metadata>5e749a0a474e5110e292f2e7536d4374</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>splitwise home</sys_name>
+        <sys_package display_value="Splitwise" source="x_881767_splitwise">534b06d447021110e292f2e7536d438f</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Splitwise">534b06d447021110e292f2e7536d438f</sys_scope>
+        <sys_scope_delete display_value="">18b1ccc3dfbf4b7d876f6c0d8952f371</sys_scope_delete>
+        <sys_update_name>sys_ux_app_config_5e749a0a474e5110e292f2e7536d4374</sys_update_name>
+        <sys_update_version display_value="sys_ux_app_config_5e749a0a474e5110e292f2e7536d4374">9a749a0a474e5110e292f2e7536d4376</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-09-22 05:30:20</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

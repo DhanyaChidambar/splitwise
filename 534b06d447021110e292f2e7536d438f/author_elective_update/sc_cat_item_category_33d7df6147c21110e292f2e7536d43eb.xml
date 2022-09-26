@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sc_cat_item_category">
+    <sc_cat_item_category action="DELETE">
+        <sc_cat_item display_value="">5c8717ed47821110e292f2e7536d4301</sc_cat_item>
+        <sc_category display_value="Splitwise user categoty">89b75f6147c21110e292f2e7536d4333</sc_category>
+        <sys_class_name>sc_cat_item_category</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-09-20 09:33:50</sys_created_on>
+        <sys_id>33d7df6147c21110e292f2e7536d43eb</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Splitwise user categoty.</sys_name>
+        <sys_package display_value="Splitwise" source="x_881767_splitwise">534b06d447021110e292f2e7536d438f</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Splitwise">534b06d447021110e292f2e7536d438f</sys_scope>
+        <sys_update_name>sc_cat_item_category_33d7df6147c21110e292f2e7536d43eb</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-09-20 09:33:50</sys_updated_on>
+    </sc_cat_item_category>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Splitwise">534b06d447021110e292f2e7536d438f</application>
+        <file_path/>
+        <instance_id>f9468166dbbfd3808264f70fbf9619e4</instance_id>
+        <instance_name>dev70031</instance_name>
+        <name>sc_cat_item_category_33d7df6147c21110e292f2e7536d43eb</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sc_cat_item_category"><sc_cat_item_category action="INSERT_OR_UPDATE"><sc_cat_item display_value="">5c8717ed47821110e292f2e7536d4301</sc_cat_item><sc_category display_value="Splitwise user categoty">89b75f6147c21110e292f2e7536d4333</sc_category><sys_class_name>sc_cat_item_category</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2022-09-20 09:33:50</sys_created_on><sys_id>33d7df6147c21110e292f2e7536d43eb</sys_id><sys_mod_count>0</sys_mod_count><sys_name>Splitwise user categoty.</sys_name><sys_package display_value="Splitwise" source="x_881767_splitwise">534b06d447021110e292f2e7536d438f</sys_package><sys_policy/><sys_scope display_value="Splitwise">534b06d447021110e292f2e7536d438f</sys_scope><sys_update_name>sc_cat_item_category_33d7df6147c21110e292f2e7536d43eb</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2022-09-20 09:33:50</sys_updated_on></sc_cat_item_category></record_update>]]></payload>
+        <payload_hash>317257454</payload_hash>
+        <record_name>Splitwise user categoty.</record_name>
+        <reverted_from/>
+        <source>66dff24547ce5110e292f2e7536d43e0</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-09-20 09:33:50</sys_created_on>
+        <sys_id>f7d7df6147c21110e292f2e7536d43ee</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>1835a3f21920000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-09-20 09:33:50</sys_updated_on>
+        <type>Catalog Item Category</type>
+        <update_guid>33d7df61d8c21110a7b63663726672ee</update_guid>
+        <update_guid_history>33d7df61d8c21110a7b63663726672ee:317257454</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete display_value="Splitwise user categoty.">ba885fa147c21110e292f2e7536d432d</sys_audit_delete>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-09-20 09:36:46</sys_created_on>
+        <sys_db_object display_value="" name="sc_cat_item_category">sc_cat_item_category</sys_db_object>
+        <sys_id>27a8b92924a7433f93b2635d59116049</sys_id>
+        <sys_metadata>33d7df6147c21110e292f2e7536d43eb</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Splitwise user categoty.</sys_name>
+        <sys_package display_value="Splitwise" source="x_881767_splitwise">534b06d447021110e292f2e7536d438f</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Splitwise">534b06d447021110e292f2e7536d438f</sys_scope>
+        <sys_scope_delete display_value="">18b1ccc3dfbf4b7d876f6c0d8952f371</sys_scope_delete>
+        <sys_update_name>sc_cat_item_category_33d7df6147c21110e292f2e7536d43eb</sys_update_name>
+        <sys_update_version display_value="sc_cat_item_category_33d7df6147c21110e292f2e7536d43eb">f7d7df6147c21110e292f2e7536d43ee</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-09-20 09:36:46</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

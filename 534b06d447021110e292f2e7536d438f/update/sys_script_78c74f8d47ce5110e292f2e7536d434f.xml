@@ -18,7 +18,7 @@
         <filter_condition/>
         <is_rest>false</is_rest>
         <message/>
-        <name>After Insert or Update of Expense group</name>
+        <name>After Update of Expense grp add members</name>
         <order>100</order>
         <priority>100</priority>
         <rest_method/>
@@ -32,14 +32,14 @@
 	var curMembers=current.getValue('members');
 	var curMembersArr=curMembers.split(",");
 	var prev = previous.getValue('members');
-	var pre;
+	var pre=[];
 	if(prev){
 		pre = prev.split(",");
 	}
 	for(var i=0;i<curMembersArr.length;i++){
 		//if(pre[i]!=curMembersArr[i]){
 		if(pre.indexOf(curMembersArr[i])==-1){
-			gs.info("Found new member "+curMembersArr[i])
+			gs.info("Found new member "+curMembersArr[i]);
 			gr.group=current.getValue('sys_id');
 			gr.user=curMembersArr[i];
 			gr.insert();
@@ -65,15 +65,15 @@
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>78c74f8d47ce5110e292f2e7536d434f</sys_id>
-        <sys_mod_count>30</sys_mod_count>
-        <sys_name>After Insert or Update of Expense group</sys_name>
+        <sys_mod_count>34</sys_mod_count>
+        <sys_name>After Update of Expense grp add members</sys_name>
         <sys_overrides/>
         <sys_package display_value="Splitwise" source="x_881767_splitwise">534b06d447021110e292f2e7536d438f</sys_package>
         <sys_policy/>
         <sys_scope display_value="Splitwise">534b06d447021110e292f2e7536d438f</sys_scope>
         <sys_update_name>sys_script_78c74f8d47ce5110e292f2e7536d434f</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2022-09-20 06:25:31</sys_updated_on>
+        <sys_updated_on>2022-09-26 05:23:41</sys_updated_on>
         <template/>
         <when>after</when>
     </sys_script>

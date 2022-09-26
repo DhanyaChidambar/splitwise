@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
-    <element label="Expense" max_length="40" name="x_881767_splitwise_expense" sizeclass="1" type="collection">
-        <element label="Amount" max_length="40" name="amount" type="integer"/>
-        <element label="Group" max_length="32" name="group" reference="x_881767_splitwise_expense_group" type="reference"/>
-        <element choice_field="paid_by" choice_table="x_881767_splitwise_expense" dependent="group" dependent_on_field="group" display="true" label="Paid By" mandatory="true" max_length="32" name="paid_by" reference="x_881767_splitwise_user_group" reference_qual="javascript:&quot;group=&quot;+current.group" type="reference" use_dependent_field="true" use_reference_qualifier="advanced"/>
+    <element audit="true" label="Expense" max_length="40" name="x_881767_splitwise_expense" sizeclass="6" type="collection">
+        <element label="Amount" max_length="20" name="amount" type="decimal"/>
+        <element label="Group" max_length="32" name="group" read_only="true" reference="x_881767_splitwise_expense_group" type="reference"/>
+        <element choice="3" choice_field="paid_by" choice_table="x_881767_splitwise_expense" dependent="group" dependent_on_field="group" label="Paid By" mandatory="true" max_length="32" name="paid_by" reference="x_881767_splitwise_user_group" reference_qual="javascript:&quot;group=&quot;+current.group" type="reference" use_dependent_field="true" use_dynamic_default="true" use_reference_qualifier="advanced">
+            <choice>
+                <element dependent_value="-- Edit this --" inactive_on_update="false" label="-- New choice --" value="-- New choice --"/>
+            </choice>
+        </element>
         <element default="true" label="divide equally among members?" max_length="40" name="u_divide_equally" type="boolean"/>
+        <element display="true" label="Name" mandatory="true" max_length="40" name="u_name" type="string"/>
+        <element calculation="(function calculatedFieldValue(current) {&#13;&#10;&#13;&#10;&#9;alert('current group '+current.getValue('group'));&#13;&#10;&#9;gs.addInfoMessage('current group '+current.getValue('group'));&#13;&#10;&#9;var li=[];&#13;&#10;&#9;li.push(&quot;Dhanya&quot;);&#13;&#10;&#9;li.push(&quot;Avin&quot;);&#13;&#10;&#9;return li;  // return the calculated value&#13;&#10;&#13;&#10;})(current);" choice_table="sys_user" label="Involved Members" max_length="4000" name="u_user_share_pair" reference="x_881767_splitwise_user_group" reference_qual="javascript:&quot;group=&quot;+current.group" type="glide_list" use_reference_qualifier="advanced"/>
         <index name="index">
             <element name="paid_by"/>
         </index>

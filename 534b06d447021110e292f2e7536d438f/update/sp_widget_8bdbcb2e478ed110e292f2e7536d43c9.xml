@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function($rootScope,$scope,spUtil) {
+  /* widget controller */
+  var c = this;
+	c.data.groups=[];
+	c.loadGroups = function(event){
+		
+		
+		c.server.get({
+        action: "getGroups"
+      }).then(function(r) {
+        
+			c.data.groups=r.data.groups;
+			console.log(r.data.groups);
+			console.log(c.data.groups[0]);
+      });
+	}
+	c.clicked = function(event,action){
+		
+		c.data.action =event.target.value;
+		console.log("clicked "+c.data.action+" "+action);
+		$rootScope.$broadcast(action,c.data.action);
+	}
+	
+	c.openGroupPage=function(event,groupId,groupName){
+		var groupData={};
+		groupData.groupId=groupId;
+		groupData.groupName=groupName;
+		$rootScope.$broadcast('showGroupPage',groupData);
+	}
+	
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.custom-list-group{
+  margin-top:2em;
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>true</has_preview>
+        <id>list_of_sw_options</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {  }]]></link>
+        <name>List Of SW Options</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+	if (input && input.action) {
+		if (input.action == 'getGroups') {
+			data.groups = [];
+			var groups = new GlideRecord('x_881767_splitwise_user_group');
+			groups.addQuery('user',gs.getUser().getID());
+			console.log(" user "+gs.getUser().getID())
+			//groups.addQuery('group.active', true);
+			groups.query();
+			console.log("count "+groups.getRowCount());
+			while (groups.next()) {
+				var gp={};
+				//group.name=groupsgroup;
+				//group.sys_id=groups.group.sys_id;
+				//console.log("group "+JSON.stringify(group));
+				$sp.getRecordDisplayValues(gp, groups, 'group');
+				gp.id= groups.getValue('group');
+				data.groups.push(gp);
+			}
+		}
+	}
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-09-23 11:15:17</sys_created_on>
+        <sys_id>8bdbcb2e478ed110e292f2e7536d43c9</sys_id>
+        <sys_mod_count>121</sys_mod_count>
+        <sys_name>List Of SW Options</sys_name>
+        <sys_package display_value="Splitwise" source="x_881767_splitwise">534b06d447021110e292f2e7536d438f</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Splitwise">534b06d447021110e292f2e7536d438f</sys_scope>
+        <sys_update_name>sp_widget_8bdbcb2e478ed110e292f2e7536d43c9</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-09-25 11:41:45</sys_updated_on>
+        <template><![CDATA[<div class="container-fluid">
+  <!-- your widget template -->
+  <div id="menu-container">
+    <div class="list-group custom-list-group" id="menu-group">
+      <button type="button" class="list-group-item list-group-item-action" value = "dashboard" ng-click="c.clicked($event,'openDashboard')">Dashboard</button>
+      <div class="card-header" id="headingOne">
+        <button class="btn btn-link" type="button" data-toggle="collapse" class="list-group-item list-group-item-action" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" ng-click="c.loadGroups($event)">
+          Groups
+        </button>
+      </div>
+      <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#menu-group">
+        <div id="active-groups">
+          <div class="list-group-item" id="menu-group" ng-repeat="group in c.data.groups">
+            <button type="button" class="list-group-item list-group-item-action" ng-click="c.openGroupPage($event,group.id,group.group)">{{group.group}}</button>
+          </div>
+        </div>
+      </div>
+      <button type="button" class="list-group-item list-group-item-action" value = "allExpenses" ng-click="c.clicked($event,'openAllExpenses')">All Expenses</button>
+    </div>
+
+  </div>
+</div>]]></template>
+    </sp_widget>
+</record_update>

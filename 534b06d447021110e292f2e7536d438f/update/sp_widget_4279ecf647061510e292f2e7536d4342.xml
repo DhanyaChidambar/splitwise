@@ -1,0 +1,467 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function($rootScope,$scope,spUtil) {
+	/* widget controller */
+	var c = this;
+	var getUserGroupIdForCurrentUser = function(data){
+		c.server.get({
+			action: "getCurrentUserInUG",
+			groupId:data
+		}).then(function(r) {
+			console.log(" usergroup id "+r.data.userGroupId);
+			var groupData={};
+			groupData.userGroupId=r.data.userGroupId;
+			groupData.groupId=data;
+			$rootScope.$broadcast('gotUserGroupId',groupData);
+			
+		});
+	}
+	var displayDashBoard = function(data){
+
+		console.log("data is"+data);
+		c.server.get({
+			action: data
+		}).then(function(r) {
+			c.data.balance = r.data.totals.balance;
+			c.data.owed = r.data.totals.owed;
+			c.data.owe = r.data.totals.owe;
+		});
+	}
+	var displayCurrentGroup = function(data){
+
+		console.log("data is"+data);
+		c.server.get({
+			action: 'getGroupDetails',
+			groupId:data
+		}).then(function(r) {
+			console.log(r.data);
+			c.data.group_balance = r.data.totals.group_balance;
+			c.data.group_owed = r.data.totals.group_owed;
+			c.data.group_owe = r.data.totals.group_owe;
+		});
+	}
+
+	var displayGroupMembers = function(groupId){
+		c.server.get({
+			action: 'getGroupMembers',
+			groupId:groupId
+		}).then(function(r) {
+			console.log(r.data);
+			c.data.members = r.data.members;
+			
+			//c.data.group_owed = r.data.totals.group_owed;
+			//c.data.group_owe = r.data.totals.group_owe;
+		});
+	}
+
+	var displayGroupExpenses= function(groupId){
+		getUserGroupIdForCurrentUser(groupId);
+	}
+	
+	$rootScope.$on('gotUserGroupId',function(event,data){
+		console.log("input.userGroupId "+data);
+	c.server.get({
+			action: 'getGroupExpenses',
+			groupId:data.groupId,
+			userGroupId:data.userGroupId
+		}).then(function(r) {
+			console.log(r.data);
+			c.data.expenses = r.data.expenses;
+			//u_user_share_pairLIKE221e42d6470e9110e292f2e7536d43fd
+			//c.data.group_owed = r.data.totals.group_owed;
+			//c.data.group_owe = r.data.totals.group_owe;
+		});
+	});
+
+	c.data.action="dashboard";
+	displayDashBoard(c.data.action);
+	$rootScope.$on('openDashboard',function(event,data){
+		c.data.action="dashboard";
+		displayDashBoard(data);
+	});
+	$rootScope.$on('showGroupPage',function(event,data){
+		c.data.action = 'showGroupPage';
+		c.data.groupName = data.groupName;
+		c.data.groupId=data.groupId;
+		console.log("about to open group "+c.data.groupId+" "+c.data.groupName);
+		displayCurrentGroup(data.groupId);
+		displayGroupMembers(data.groupId);
+		displayGroupExpenses(data.groupId);
+
+	});
+	$rootScope.$on('openAllExpenses',function(event,data){
+		c.data.action=data;
+	});
+
+
+}
+
+]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.content-header{
+  background-color:#eee;
+  color:black;
+}
+.btn-orange{
+  background: #ff652f;
+  color: #fff;
+  text-shadow: 0 -1px 0 #c83400;
+}
+.btn-mint {
+  background: #5bc5a7;
+  color: #fff;
+  text-shadow: 0 -1px 0 #318970;
+}
+.button-container{
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  text-align:right;
+}
+.dashboard-totals{
+  text-align:center;
+}
+.members-header{
+ margin-top:2em; 
+}
+.members-list{
+  margin-bottom:0;
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>true</has_preview>
+        <id>splitwise_content</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {  }]]></link>
+        <name>Splitwise Content</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+	//create an array to populate with notes
+	if (input && input.action) {
+		if (input.action == 'dashboard') {
+			data.totals = {};
+			var noteGR = new GlideAggregate('x_881767_splitwise_user_expense');
+			noteGR.addQuery('user.user',gs.getUser().getID());
+			noteGR.addAggregate('SUM', 'spent');
+			noteGR.addAggregate('SUM', 'share');
+			noteGR.orderByDesc('group');
+			noteGR.query();
+			data.totals.balance = 0;
+			data.totals.owe = 0;
+			data.totals.owed = 0;
+			while (noteGR.next()) {
+				var spent=noteGR.getAggregate('SUM','spent');
+				var share=noteGR.getAggregate('SUM','share');
+				var balance = spent-share;
+				data.totals.balance=data.totals.balance+balance;
+				if(balance>0){
+					data.totals.owed=data.totals.owed+balance;
+				}else{
+					data.totals.owe=data.totals.owe+balance;
+
+				}
+				console.log("spent "+spent+" share "+share+" balance "+balance+" note "+noteGR.group.group_name);
+			}
+
+		}
+		else if(input.action=='getGroupDetails'){
+
+			data.totals = {};
+			var noteGR = new GlideAggregate('x_881767_splitwise_user_expense');
+			noteGR.addQuery('user.user',gs.getUser().getID());
+			noteGR.addAggregate('SUM', 'spent');
+			noteGR.addAggregate('SUM', 'share');
+			noteGR.addQuery('group',input.groupId);
+			noteGR.query();
+			data.totals.group_balance = 0;
+			data.totals.group_owe = 0;
+			data.totals.group_owed = 0;
+			while (noteGR.next()) {
+				var spent=noteGR.getAggregate('SUM','spent');
+				var share=noteGR.getAggregate('SUM','share');
+				var balance = spent-share;
+				data.totals.group_balance=data.totals.group_balance+balance;
+				if(balance>0){
+					data.totals.group_owed=data.totals.group_owed+balance;
+				}else{
+					data.totals.group_owe=data.totals.group_owe+balance;
+
+				}
+				console.log("spent "+spent+" share "+share+" balance "+balance+" note "+noteGR.group.group_name);
+			}
+
+		}
+		else if(input.action=='getGroupMembers'){
+			data.members= [];
+			var userRecord=new GlideRecord('x_881767_splitwise_user_group');
+			console.log(" group is "+input.groupId);
+			userRecord.addQuery('group.sys_id',input.groupId);
+			userRecord.query();
+			console.log("rows "+userRecord.getRowCount());
+			while(userRecord.next()){
+				var member={};
+				member.name=userRecord.getDisplayValue('user');
+				member.sys_id=userRecord.getValue('user');
+				console.log("user.user "+member.sys_id+" group.sys_id "+input.groupId)
+				var noteGR = new GlideAggregate('x_881767_splitwise_user_expense');
+			noteGR.addQuery('user.user',member.sys_id);
+			noteGR.addAggregate('SUM', 'spent');
+			noteGR.addAggregate('SUM', 'share');
+			noteGR.addQuery('group.sys_id',input.groupId);
+			noteGR.query();
+			member.totals={};
+			member.totals.group_balance = 0;
+			member.totals.group_owe = 0;
+			member.totals.group_owed = 0;
+			while (noteGR.next()) {
+				var spent=noteGR.getAggregate('SUM','spent');
+				var share=noteGR.getAggregate('SUM','share');
+				var balance = spent-share;
+				member.totals.group_balance=member.totals.group_balance+balance;
+				if(balance>0){
+					member.totals.group_owed=member.totals.group_owed+balance;
+				}else{
+					member.totals.group_owe=member.totals.group_owe+balance;
+
+				}
+				console.log("spent "+spent+" share "+share+" balance "+balance+" note "+noteGR.group.group_name);
+			}
+				data.members.push(member);
+			}
+		}
+		else if(input.action=='getGroupExpenses'){
+			data.expenses=[];
+			var expGR=new GlideRecord('x_881767_splitwise_expense');
+			expGR.addQuery('group.sys_id',input.groupId);
+			expGR.query();
+			while(expGR.next()){
+				var exp={};
+				exp.name=expGR.getValue('u_name');
+				exp.amount=expGR.getValue('amount');
+				exp.paid_by=expGR.getDisplayValue('paid_by');
+				if(expGR.getValue('u_user_share_pair') && expGR.getValue('u_user_share_pair').contains(input.userGroupId)){
+					var userExpGR=new GlideRecord('x_881767_splitwise_user_expense');
+					userExpGR.addQuery('expense.sys_id='+expGR.sys_id+'^user.sys_id='+input.userGroupId);
+					userExpGR.query();
+					if(userExpGR.next()){
+						var share=userExpGR.getValue('share');
+						if(expGR.getValue('paid_by')==input.userGroupId){
+							exp.myShare=exp.amount-share;	
+						}else{
+							exp.myShare=0-share;	
+						}
+						
+					}
+				}else{
+					exp.myShare=0;
+				}
+				exp.date=expGR.getDisplayValue('sys_created_on').slice(0,10);
+			data.expenses.push(exp);
+			}
+			console.log("expenses "+data.expenses+' '+input.groupId+" "+input.userGroupId);
+		}
+		else if(input.action=='allExpenses'){
+
+		}else if(input.action=='getCurrentUserInUG'){
+			//data.userGrp={}
+			var ug=new GlideRecord('x_881767_splitwise_user_group');
+			ug.addEncodedQuery('user.sys_id='+gs.getUser().getID()+'^group.sys_id='+input.groupId);
+			ug.query();
+			if(ug.next()){
+				var id=ug.getValue('sys_id');
+				console.log(" UG Id "+ug.getValue('sys_id')+" ");
+				data.userGroupId=id.toString();
+			}
+			console.log(data.userGroupId);
+		}
+	}
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-09-23 18:04:16</sys_created_on>
+        <sys_id>4279ecf647061510e292f2e7536d4342</sys_id>
+        <sys_mod_count>157</sys_mod_count>
+        <sys_name>Splitwise Content</sys_name>
+        <sys_package display_value="Splitwise" source="x_881767_splitwise">534b06d447021110e292f2e7536d438f</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Splitwise">534b06d447021110e292f2e7536d438f</sys_scope>
+        <sys_update_name>sp_widget_4279ecf647061510e292f2e7536d4342</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-09-25 19:34:08</sys_updated_on>
+        <template><![CDATA[<div class="container-fluid">
+  <div id="main-dashboard" class="row" ng-if="c.data.action=='dashboard'">
+    <div class="content-header">
+      <h2 class="col-md-6">
+        Dashboard  
+      </h2>
+      <div id="main-button-container" class="col-md-6 button-container">
+        <a class="btn btn-large btn-orange " data-toggle="modal" href="#add_bill">
+          Add new group
+        </a>
+      </div>
+      <hr/>
+      <div class="row dashboard-totals" id="balance-container">
+        <div class="col-md-4 ">
+          <h4>
+            Your total 
+          </h4><h5>
+          {{c.data.balance}}
+          </h5>
+        </div>
+        <div class="col-md-4">
+          <h4>
+            you owe 
+          </h4>
+          <h5>
+            {{c.data.owe}}
+          </h5>
+        </div>
+        <div class="col-md-4">
+          <h4>
+            You are owed 
+          </h4>
+          <h5>
+            {{c.data.owed}}
+          </h5>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div id="all-groups" class="row" ng-if="c.data.action=='showGroupPage'">
+
+    <div class="content-header ">
+      <h2 class="col-md-6">
+        {{c.data.groupName}}  
+      </h2>
+      <div id="main-button-container" class="col-md-6 button-container">
+        <a class="btn btn-large btn-orange " data-toggle="modal" href="#add_bill">
+          Add an expense
+        </a>
+        <a class="btn btn-large btn-mint" data-toggle="modal" href="#settle_up_form">
+          Settle up
+        </a>
+      </div>
+      <hr/>
+      <div class="row dashboard-totals" id="balance-container">
+        <div class="col-md-4 ">
+          <h4>
+            Your total 
+          </h4><h5>
+          {{c.data.group_balance}}
+          </h5>
+        </div>
+        <div class="col-md-4">
+          <h4>
+            you owe 
+          </h4>
+          <h5>
+            {{c.data.group_owe}}
+          </h5>
+        </div>
+        <div class="col-md-4">
+          <h4>
+            You are owed 
+          </h4>
+          <h5>
+            {{c.data.group_owed}}
+          </h5>
+        </div>
+      </div>
+    </div>
+    <div id="members-container">
+      <div class="members-header" id="members-heading">
+        <button class="btn btn-link" type="button" data-toggle="collapse" class="list-group-item dropdown-toggle" data-target="#membersDetails" aria-expanded="true" aria-controls="collapseOne" ng-click="c.loadGroups($event)">
+          Group Members Balances <i class="fa-thin fa-square-chevron-down"></i>
+        </button>
+      </div>
+      <div id="membersDetails" class="collapse" aria-labelledby="members-heading">
+        <ul class="list-group members-list" ng-repeat="member in c.data.members">
+          <li class="list-group-item">
+            <h4>
+              {{member.name}}
+            </h4>
+            <h5 ng-if="member.totals.group_balance>0" style="color:green">
+              Gets back {{member.totals.group_balance}}
+            </h5>
+            <h5 ng-if="member.totals.group_balance<0" style="color:red">
+              Owes {{0-member.totals.group_balance}}
+            </h5>
+            <h5 ng-if="member.totals.group_balance==0" >
+              All settled
+            </h5>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+    <div id="expense-container">
+      <div>
+        <div class="expense-header row">
+          <h4 class="col-md-6">
+            Expenses
+          </h4>
+        </div>
+        <ul class="expense-body list-group" ng-repeat="exp in c.data.expenses">
+          <div class=" list-group-item row">
+            <div class="col-md-2">
+              <h4>
+                {{exp.date}}
+              </h4>
+            </div>
+            <div class="col-md-5">
+              <h4>
+                {{exp.name}}
+              </h4>
+            </div>
+            <div class="col-md-3">
+              <h5>
+                {{exp.paid_by}} paid 
+              </h5>
+              <h4>
+                {{exp.amount}}
+              </h4>
+            </div>
+            <div class="col-md-2" ng-if="exp.myShare>0" style="color:green">
+              <h5>
+                You lent 
+              </h5>
+              <h4>
+                {{exp.myShare}}
+              </h4>
+            </div>
+            <div class="col-md-2" ng-if="exp.myShare<0" style="color:red">
+              <h5>
+                You borrowed 
+              </h5>
+              <h4>
+                {{0-exp.myShare}}
+              </h4>
+            </div>
+            <div class="col-md-2" ng-if="exp.myShare==0" style="color:grey">
+              <h5>
+                You are not involved
+              </h5>
+            </div>
+          </div>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div id="all-expenses" class="all-expenses-header" ng-if="c.data.action=='allExpenses'">
+    <h1>
+      All Expenses
+    </h1>
+  </div>
+</div>
+]]></template>
+    </sp_widget>
+</record_update>

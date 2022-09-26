@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
-    <element label="User - Expense" max_length="40" name="x_881767_splitwise_user_expense" sizeclass="0" type="collection">
-        <element label="Expense" max_length="32" name="expense" reference="x_881767_splitwise_expense" type="reference"/>
+    <element label="User - Expense" max_length="40" name="x_881767_splitwise_user_expense" sizeclass="17" type="collection">
+        <element display="true" label="Expense" max_length="32" name="expense" reference="x_881767_splitwise_expense" reference_floats="true" type="reference"/>
         <element label="Group" max_length="32" name="group" reference="x_881767_splitwise_expense_group" type="reference"/>
-        <element label="Share" max_length="40" name="share" type="integer"/>
-        <element label="Spent" max_length="40" name="spent" type="integer"/>
-        <element label="User" max_length="32" name="user" reference="sys_user" type="reference"/>
+        <element default="0" label="Share" max_length="20" name="share" type="decimal"/>
+        <element default="0" label="Spent" max_length="20" name="spent" type="decimal"/>
+        <element choice="3" label="User" max_length="32" name="user" reference="x_881767_splitwise_user_group" reference_qual="javascript:&quot;group=&quot;+current.group" type="reference" use_dynamic_default="true" use_reference_qualifier="advanced">
+            <choice/>
+        </element>
+        <element default="0" label="Balance" max_length="40" name="u_balance" type="decimal"/>
         <index name="index">
             <element name="expense"/>
         </index>

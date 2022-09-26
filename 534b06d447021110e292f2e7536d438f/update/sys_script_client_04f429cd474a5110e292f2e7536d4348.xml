@@ -4,7 +4,7 @@
         <applies_extended>false</applies_extended>
         <condition/>
         <description/>
-        <field>u_paid_by</field>
+        <field/>
         <global>true</global>
         <isolate_script>true</isolate_script>
         <messages/>
@@ -19,7 +19,7 @@
 // 		getUser.addParam('sysparm_group', g_form.getValue('group'));
 // 		getUser.getXML(populateCurrentPaidBy);
 // 	}
-	 var getEmailAddr = new GlideAjax('getGroupBySysId');
+	 var getEmailAddr = new GlideAjax('getGroupMembersByGroupSysId');
     // Specify the getEmail method
 	alert("You are inside group "+g_form.getValue('group'));
     getEmailAddr.addParam('sysparm_name','getGroup');
@@ -34,16 +34,17 @@
         // Extract the email address from the response, clear any value from the email field, 
         // set new value in the email field
         var emailFromScriptInclude = response.responseXML.documentElement.getAttribute("answer");
-        //g_form.clearValue('u_requested_for_email');
-        //g_form.setValue('u_requested_for_email',emailFromScriptInclude);
+        console.log(emailFromScriptInclude+' ');
 		var userIds=JSON.parse(emailFromScriptInclude);
 		//for(var i=0;i<userIds.length;i++){
 			
 		//}
-		for(const [key, val] of Object.entries(userIds)){
+// 		for(const [key, val] of Object.entries(userIds)){
 			
-			g_form.addOption('u_paid_by',key,val);
-		}
+// 			g_form.addOption('u_paid_by',key,val);
+			
+// 		}
+		g_form.setValue("u_user_share_pair", emailFromScriptInclude);
 		console.log(emailFromScriptInclude+' ');
     }
    
@@ -54,7 +55,7 @@
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>04f429cd474a5110e292f2e7536d4348</sys_id>
-        <sys_mod_count>18</sys_mod_count>
+        <sys_mod_count>23</sys_mod_count>
         <sys_name>Get Members by Group ID</sys_name>
         <sys_overrides/>
         <sys_package display_value="Splitwise" source="x_881767_splitwise">534b06d447021110e292f2e7536d438f</sys_package>
@@ -62,7 +63,7 @@
         <sys_scope display_value="Splitwise">534b06d447021110e292f2e7536d438f</sys_scope>
         <sys_update_name>sys_script_client_04f429cd474a5110e292f2e7536d4348</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2022-09-18 18:17:02</sys_updated_on>
+        <sys_updated_on>2022-09-20 09:31:03</sys_updated_on>
         <table>x_881767_splitwise_expense</table>
         <type>onLoad</type>
         <ui_type>10</ui_type>

@@ -2,13 +2,13 @@
     <sys_script_include action="INSERT_OR_UPDATE">
         <access>public</access>
         <active>true</active>
-        <api_name>x_881767_splitwise.getGroupBySysId</api_name>
+        <api_name>x_881767_splitwise.getGroupMembersByGroupSysId</api_name>
         <caller_access/>
         <client_callable>true</client_callable>
         <description/>
-        <name>getGroupBySysId</name>
-        <script><![CDATA[var getGroupBySysId = Class.create();
-getGroupBySysId.prototype = Object.extendsObject(global.AbstractAjaxProcessor,{
+        <name>getGroupMembersByGroupSysId</name>
+        <script><![CDATA[var getGroupMembersByGroupSysId = Class.create();
+getGroupMembersByGroupSysId.prototype = Object.extendsObject(global.AbstractAjaxProcessor,{
 	// Define the getEmail function.  
 	// Create a GlideRecord for the User table.
 	// Use the sysparm_userID passed from the client side to retrieve a record from the User table.
@@ -43,19 +43,19 @@ getGroupBySysId.prototype = Object.extendsObject(global.AbstractAjaxProcessor,{
 		}
 		return "error";
 	},
-	type: 'getGroupBySysId'
+	type: 'getGroupMembersByGroupSysId'
 });]]></script>
         <sys_class_name>sys_script_include</sys_class_name>
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2022-09-16 18:07:57</sys_created_on>
         <sys_id>7d3568a8474a1110e292f2e7536d4331</sys_id>
-        <sys_mod_count>65</sys_mod_count>
-        <sys_name>getGroupBySysId</sys_name>
+        <sys_mod_count>66</sys_mod_count>
+        <sys_name>getGroupMembersByGroupSysId</sys_name>
         <sys_package display_value="Splitwise" source="x_881767_splitwise">534b06d447021110e292f2e7536d438f</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="Splitwise">534b06d447021110e292f2e7536d438f</sys_scope>
         <sys_update_name>sys_script_include_7d3568a8474a1110e292f2e7536d4331</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2022-09-18 17:53:39</sys_updated_on>
+        <sys_updated_on>2022-09-20 08:43:44</sys_updated_on>
     </sys_script_include>
 </record_update>
