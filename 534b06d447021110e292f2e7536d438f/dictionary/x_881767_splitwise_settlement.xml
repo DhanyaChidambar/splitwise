@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Settlement" max_length="40" name="x_881767_splitwise_settlement" sizeclass="2" type="collection">
+        <element default="0" label="Amount" max_length="20" name="amount" type="decimal"/>
+        <element label="From" max_length="32" name="from" reference="sys_user" type="reference"/>
+        <element label="Group" max_length="32" name="group" reference="x_881767_splitwise_expense_group" type="reference"/>
+        <element label="Settled" max_length="40" name="settled" type="boolean"/>
+        <element label="To" max_length="32" name="to" reference="sys_user" type="reference"/>
+        <index name="index">
+            <element name="from"/>
+        </index>
+        <index name="index2">
+            <element name="to"/>
+        </index>
+        <index name="index3">
+            <element name="group"/>
+        </index>
+    </element>
+</database>

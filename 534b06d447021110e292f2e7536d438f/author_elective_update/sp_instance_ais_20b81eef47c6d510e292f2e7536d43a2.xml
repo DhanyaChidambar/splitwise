@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_instance_ais">
+    <sp_instance_ais action="DELETE">
+        <active>true</active>
+        <ai_search_source_filter/>
+        <class_name/>
+        <color>default</color>
+        <css/>
+        <disable_all_suggestions>false</disable_all_suggestions>
+        <glyph/>
+        <id/>
+        <order>1</order>
+        <placeholder/>
+        <roles/>
+        <search_application/>
+        <search_results_configuration/>
+        <short_description/>
+        <size>md</size>
+        <sp_column display_value="1">53989eef47c6d510e292f2e7536d43a6</sp_column>
+        <sp_widget display_value="Add Members">a4f3deab47c6d510e292f2e7536d43cc</sp_widget>
+        <spell_check_font_size>xl</spell_check_font_size>
+        <sys_class_name>sp_instance_ais</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-09-26 10:05:40</sys_created_on>
+        <sys_id>20b81eef47c6d510e292f2e7536d43a2</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="Splitwise" source="x_881767_splitwise">534b06d447021110e292f2e7536d438f</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Splitwise">534b06d447021110e292f2e7536d438f</sys_scope>
+        <sys_update_name>sp_instance_ais_20b81eef47c6d510e292f2e7536d43a2</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-09-26 10:05:40</sys_updated_on>
+        <title/>
+        <url/>
+        <widget_parameters/>
+    </sp_instance_ais>
+    <sys_translated_text action="DELETE" query="documentkey=20b81eef47c6d510e292f2e7536d43a2"/>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Splitwise">534b06d447021110e292f2e7536d438f</application>
+        <file_path/>
+        <instance_id>f9468166dbbfd3808264f70fbf9619e4</instance_id>
+        <instance_name>dev70031</instance_name>
+        <name>sp_instance_ais_20b81eef47c6d510e292f2e7536d43a2</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_instance_ais"><sp_instance_ais action="INSERT_OR_UPDATE"><active>true</active><ai_search_source_filter/><class_name/><color>default</color><css/><disable_all_suggestions>false</disable_all_suggestions><glyph/><id/><order>1</order><placeholder/><roles/><search_application/><search_results_configuration/><short_description/><size>md</size><sp_column display_value="1">53989eef47c6d510e292f2e7536d43a6</sp_column><sp_widget display_value="Add Members">a4f3deab47c6d510e292f2e7536d43cc</sp_widget><spell_check_font_size>xl</spell_check_font_size><sys_class_name>sp_instance_ais</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2022-09-26 10:05:40</sys_created_on><sys_id>20b81eef47c6d510e292f2e7536d43a2</sys_id><sys_mod_count>0</sys_mod_count><sys_name/><sys_package display_value="Splitwise" source="x_881767_splitwise">534b06d447021110e292f2e7536d438f</sys_package><sys_policy/><sys_scope display_value="Splitwise">534b06d447021110e292f2e7536d438f</sys_scope><sys_update_name>sp_instance_ais_20b81eef47c6d510e292f2e7536d43a2</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2022-09-26 10:05:40</sys_updated_on><title/><url/><widget_parameters/></sp_instance_ais><sys_translated_text action="delete_multiple" query="documentkey=20b81eef47c6d510e292f2e7536d43a2"/></record_update>]]></payload>
+        <payload_hash>-274002932</payload_hash>
+        <record_name/>
+        <reverted_from/>
+        <source>66dff24547ce5110e292f2e7536d43e0</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-09-26 10:05:40</sys_created_on>
+        <sys_id>acb81223470ad510e292f2e7536d4330</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>18379426f750000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-09-26 10:05:40</sys_updated_on>
+        <type>Instance with Search</type>
+        <update_guid>e4b81223070ad51023392c66181f1830</update_guid>
+        <update_guid_history>e4b81223070ad51023392c66181f1830:-274002932</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete display_value="">b38a1223470ad510e292f2e7536d438f</sys_audit_delete>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-09-26 10:13:48</sys_created_on>
+        <sys_db_object display_value="" name="sp_instance_ais">sp_instance_ais</sys_db_object>
+        <sys_id>96d4c6d4c7b74b469cd8e67de5586529</sys_id>
+        <sys_metadata>20b81eef47c6d510e292f2e7536d43a2</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="Splitwise" source="x_881767_splitwise">534b06d447021110e292f2e7536d438f</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Splitwise">534b06d447021110e292f2e7536d438f</sys_scope>
+        <sys_scope_delete display_value="">18b1ccc3dfbf4b7d876f6c0d8952f371</sys_scope_delete>
+        <sys_update_name>sp_instance_ais_20b81eef47c6d510e292f2e7536d43a2</sys_update_name>
+        <sys_update_version display_value="sp_instance_ais_20b81eef47c6d510e292f2e7536d43a2">acb81223470ad510e292f2e7536d4330</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-09-26 10:13:48</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function ($rootScope,$scope,spUtil) {
+	var c = this;
+	c.data.users=[];
+$scope.$on("field.change", function(evt, parms) {
+ console.log(parms);
+}
+	//ng-repeat="user in c.data.users"
+)}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.tt-query, /* UPDATE: newer versions use tt-input instead of tt-query */
+.tt-hint {
+    width: 396px;
+    height: 30px;
+    padding: 8px 12px;
+    font-size: 24px;
+    line-height: 30px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    outline: none;
+}
+
+.tt-query { /* UPDATE: newer versions use tt-input instead of tt-query */
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+
+.tt-hint {
+    color: #999;
+}
+
+.tt-menu { /* UPDATE: newer versions use tt-menu instead of tt-dropdown-menu */
+    width: 422px;
+    margin-top: 12px;
+    padding: 8px 0;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    box-shadow: 0 5px 10px rgba(0,0,0,.2);
+}
+
+.tt-suggestion {
+    padding: 3px 20px;
+    font-size: 18px;
+    line-height: 24px;
+    cursor: pointer;
+}
+
+.tt-suggestion:hover {
+    color: #f0f0f0;
+    background-color: #0097cf;
+}
+
+.tt-suggestion p {
+    margin: 0;
+}
+
+</css>
+        <data_table>sp_instance_ais</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list>search_application,search_results_configuration,disable_all_suggestions,placeholder,ai_search_source_filter</field_list>
+        <has_preview>true</has_preview>
+        <id>add_members</id>
+        <internal>false</internal>
+        <link><![CDATA[function(scope, elem) {
+	var lazyLoader = $injector.get("lazyLoader");
+    var SEARCH_EXECUTED_EVENT = "SN_SEARCH_COMBOBOX#SEARCH_EXECUTED";
+    var NAVIGATION_EVENT = "SN_SEARCH_COMBOBOX#NAVIGATION_EXECUTED";
+
+	lazyLoader.putTemplates(scope.data.typeaheadTemplates);
+
+    if (scope.c.data.aisEnabled) {
+        elem.on(SEARCH_EXECUTED_EVENT, ".aisearch", function(result) {
+            scope.c.aisSubmit(result.detail.payload);
+        })
+
+
+        elem.on(NAVIGATION_EVENT, ".aisearch", function(result) {
+            var resultPayload = result.detail.payload;
+            scope.c.navigate(scope.c.data, resultPayload.actionPayload, resultPayload);
+        });
+    }
+
+}]]></link>
+        <name>Add Members</name>
+        <option_schema>[{"name":"title","section":"Presentation","label":"Title","type":"string"},{"name":"color","section":"Presentation","label":"Color","type":"string"},{"name":"glyph","section":"Presentation","label":"glyph","type":"string"},{"name":"size","section":"Presentation","label":"Size","type":"string"},{"hint":"Number of typeahead search results returned (default 15)","name":"limit","section":"Behavior","label":"Limit","type":"integer"},{"displayValue":"Search Source","hint":"If provided, limit the scope of the typeahead search to the given search sources","name":"contextual_search_sources","display_value_list":[],"section":"Behavior","label":"Contextual Search Sources","type":"glide_list","value":"sp_search_source","ed":{"reference":"sp_search_source"}}]</option_schema>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+	
+
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-09-26 09:44:55</sys_created_on>
+        <sys_id>a4f3deab47c6d510e292f2e7536d43cc</sys_id>
+        <sys_mod_count>14</sys_mod_count>
+        <sys_name>Add Members</sys_name>
+        <sys_package display_value="Splitwise" source="x_881767_splitwise">534b06d447021110e292f2e7536d438f</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Splitwise">534b06d447021110e292f2e7536d438f</sys_scope>
+        <sys_update_name>sp_widget_a4f3deab47c6d510e292f2e7536d43cc</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-09-26 10:58:36</sys_updated_on>
+        <template><![CDATA[<div class="container">
+<div id="the-basics">
+  <sn-record-picker field="user" table="'sys_user'"   display-field="'name'" value-field="'sys_id'" search-fields="'name'" page-size="100" ></sn-record-picker>
+</div>
+  </div>]]></template>
+    </sp_widget>
+</record_update>
