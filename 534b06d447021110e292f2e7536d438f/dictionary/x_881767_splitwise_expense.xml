@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
-    <element audit="true" label="Expense" max_length="40" name="x_881767_splitwise_expense" sizeclass="2" type="collection">
+    <element audit="true" label="Expense" max_length="40" name="x_881767_splitwise_expense" sizeclass="1" type="collection">
         <element label="Amount" max_length="20" name="amount" type="decimal"/>
         <element label="Group" max_length="32" name="group" read_only="true" reference="x_881767_splitwise_expense_group" type="reference"/>
         <element choice="3" choice_field="paid_by" choice_table="x_881767_splitwise_expense" dependent="group" dependent_on_field="group" label="Paid By" mandatory="true" max_length="32" name="paid_by" reference="x_881767_splitwise_user_group" reference_qual="javascript:&quot;group=&quot;+current.group" type="reference" use_dependent_field="true" use_dynamic_default="true" use_reference_qualifier="advanced">
@@ -7,11 +7,13 @@
                 <element dependent_value="-- Edit this --" inactive_on_update="false" label="-- New choice --" value="-- New choice --"/>
             </choice>
         </element>
-        <element attributes="edge_encryption_enabled=true" choice="3" default="equally" label="Split type" max_length="40" name="split_type" type="string">
+        <element attributes="edge_encryption_enabled=true" choice="3" default="equally_with_everyone" label="Split type" max_length="40" name="split_type" type="string">
             <choice>
-                <element inactive_on_update="false" label="Equally" sequence="0" value="equally"/>
-                <element inactive_on_update="false" label="By exact share" sequence="1" value="by_share"/>
-                <element inactive_on_update="false" label="By Percentage" sequence="2" value="by_percentage"/>
+                <element inactive="true" inactive_on_update="true" label="Equally" sequence="0" value="equally"/>
+                <element inactive_on_update="false" label="Equally with everyone" sequence="0" value="equally_with_everyone"/>
+                <element inactive="true" inactive_on_update="true" label="By exact share" sequence="1" value="by_share"/>
+                <element inactive_on_update="false" label="Equally among some" sequence="1" value="equally_among_some"/>
+                <element inactive="true" inactive_on_update="true" label="By Percentage" sequence="2" value="by_percentage"/>
             </choice>
         </element>
         <element default="true" label="Involve everyone?" max_length="40" name="u_divide_equally" type="boolean"/>

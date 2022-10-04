@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_script_client">
+    <sys_script_client action="DELETE">
+        <active>false</active>
+        <applies_extended>false</applies_extended>
+        <condition/>
+        <description/>
+        <field/>
+        <global>true</global>
+        <isolate_script>true</isolate_script>
+        <messages/>
+        <name>Get Members by Group ID</name>
+        <order/>
+        <script><![CDATA[function onLoad() {
+   //Type appropriate comment here, and begin script below
+// 	if(g_form.getValue('u_paid_by')){
+// 		alert("paid updated and value "+g_form.getValue('u_paid_by'));
+// 		var getUser=new GlideAjax('getUserBySysID');
+// 		getUser.addParam('sysparm_name','getUser');
+// 		getUser.addParam('sysparm_group', g_form.getValue('group'));
+// 		getUser.getXML(populateCurrentPaidBy);
+// 	}
+	 var getEmailAddr = new GlideAjax('getGroupMembersByGroupSysId');
+    // Specify the getEmail method
+	alert("You are inside group "+g_form.getValue('group'));
+    getEmailAddr.addParam('sysparm_name','getGroup');
+    // Pass the Requested for sys_id
+    getEmailAddr.addParam('sysparm_group', g_form.getValue('group'));
+    // Send the request to the server
+    getEmailAddr.getXML(populateEmailField);
+
+
+    // When the response is back from the server
+    function populateEmailField(response){
+        // Extract the email address from the response, clear any value from the email field, 
+        // set new value in the email field
+        var emailFromScriptInclude = response.responseXML.documentElement.getAttribute("answer");
+        console.log(emailFromScriptInclude+' ');
+		var userIds=JSON.parse(emailFromScriptInclude);
+		//for(var i=0;i<userIds.length;i++){
+			
+		//}
+// 		for(const [key, val] of Object.entries(userIds)){
+			
+// 			g_form.addOption('u_paid_by',key,val);
+			
+// 		}
+		g_form.setValue("u_user_share_pair", emailFromScriptInclude);
+		console.log(emailFromScriptInclude+' ');
+    }
+   
+}]]></script>
+        <sys_class_name>sys_script_client</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-09-18 11:58:59</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>04f429cd474a5110e292f2e7536d4348</sys_id>
+        <sys_mod_count>23</sys_mod_count>
+        <sys_name>Get Members by Group ID</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Splitwise" source="x_881767_splitwise">534b06d447021110e292f2e7536d438f</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Splitwise">534b06d447021110e292f2e7536d438f</sys_scope>
+        <sys_update_name>sys_script_client_04f429cd474a5110e292f2e7536d4348</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-09-20 09:31:03</sys_updated_on>
+        <table>x_881767_splitwise_expense</table>
+        <type>onLoad</type>
+        <ui_type>10</ui_type>
+        <view/>
+    </sys_script_client>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Splitwise">534b06d447021110e292f2e7536d438f</application>
+        <file_path/>
+        <instance_id>f9468166dbbfd3808264f70fbf9619e4</instance_id>
+        <instance_name>dev70031</instance_name>
+        <name>sys_script_client_04f429cd474a5110e292f2e7536d4348</name>
+        <payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update sys_domain="global" table="sys_script_client"&gt;&lt;sys_script_client action="INSERT_OR_UPDATE"&gt;&lt;active&gt;false&lt;/active&gt;&lt;applies_extended&gt;false&lt;/applies_extended&gt;&lt;condition/&gt;&lt;description/&gt;&lt;field/&gt;&lt;global&gt;true&lt;/global&gt;&lt;isolate_script&gt;true&lt;/isolate_script&gt;&lt;messages/&gt;&lt;name&gt;Get Members by Group ID&lt;/name&gt;&lt;order/&gt;&lt;script&gt;&lt;![CDATA[function onLoad() {
+   //Type appropriate comment here, and begin script below
+// 	if(g_form.getValue('u_paid_by')){
+// 		alert("paid updated and value "+g_form.getValue('u_paid_by'));
+// 		var getUser=new GlideAjax('getUserBySysID');
+// 		getUser.addParam('sysparm_name','getUser');
+// 		getUser.addParam('sysparm_group', g_form.getValue('group'));
+// 		getUser.getXML(populateCurrentPaidBy);
+// 	}
+	 var getEmailAddr = new GlideAjax('getGroupMembersByGroupSysId');
+    // Specify the getEmail method
+	alert("You are inside group "+g_form.getValue('group'));
+    getEmailAddr.addParam('sysparm_name','getGroup');
+    // Pass the Requested for sys_id
+    getEmailAddr.addParam('sysparm_group', g_form.getValue('group'));
+    // Send the request to the server
+    getEmailAddr.getXML(populateEmailField);
+
+
+    // When the response is back from the server
+    function populateEmailField(response){
+        // Extract the email address from the response, clear any value from the email field, 
+        // set new value in the email field
+        var emailFromScriptInclude = response.responseXML.documentElement.getAttribute("answer");
+        console.log(emailFromScriptInclude+' ');
+		var userIds=JSON.parse(emailFromScriptInclude);
+		//for(var i=0;i&lt;userIds.length;i++){
+			
+		//}
+// 		for(const [key, val] of Object.entries(userIds)){
+			
+// 			g_form.addOption('u_paid_by',key,val);
+			
+// 		}
+		g_form.setValue("u_user_share_pair", emailFromScriptInclude);
+		console.log(emailFromScriptInclude+' ');
+    }
+   
+}]]&gt;&lt;/script&gt;&lt;sys_class_name&gt;sys_script_client&lt;/sys_class_name&gt;&lt;sys_created_by&gt;admin&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2022-09-18 11:58:59&lt;/sys_created_on&gt;&lt;sys_domain&gt;global&lt;/sys_domain&gt;&lt;sys_domain_path&gt;/&lt;/sys_domain_path&gt;&lt;sys_id&gt;04f429cd474a5110e292f2e7536d4348&lt;/sys_id&gt;&lt;sys_mod_count&gt;23&lt;/sys_mod_count&gt;&lt;sys_name&gt;Get Members by Group ID&lt;/sys_name&gt;&lt;sys_overrides/&gt;&lt;sys_package display_value="Splitwise" source="x_881767_splitwise"&gt;534b06d447021110e292f2e7536d438f&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="Splitwise"&gt;534b06d447021110e292f2e7536d438f&lt;/sys_scope&gt;&lt;sys_update_name&gt;sys_script_client_04f429cd474a5110e292f2e7536d4348&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;admin&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2022-09-20 09:31:03&lt;/sys_updated_on&gt;&lt;table&gt;x_881767_splitwise_expense&lt;/table&gt;&lt;type&gt;onLoad&lt;/type&gt;&lt;ui_type&gt;10&lt;/ui_type&gt;&lt;view/&gt;&lt;/sys_script_client&gt;&lt;/record_update&gt;</payload>
+        <payload_hash>589307135</payload_hash>
+        <record_name>Get Members by Group ID</record_name>
+        <reverted_from/>
+        <source>66dff24547ce5110e292f2e7536d43e0</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-09-20 09:31:04</sys_created_on>
+        <sys_id>8337d36147c21110e292f2e7536d4329</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>1835a3c97c00000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-09-20 09:31:04</sys_updated_on>
+        <type>Client Script</type>
+        <update_guid>8b37d361eec211101673dcde071eef28</update_guid>
+        <update_guid_history>8b37d361eec211101673dcde071eef28:589307135,4c061321abc21110ce42fa8fa241c14f:256839660,48c513adb88211101b478ec727a66fdc:835215683,cf151b6d8f8211100ce9f3055e485029:1074207402,1bac03650b8211108ceef83281da81f7:1353958399,187cf2c150ce5110c911c8e61185286d:-778567695,fdd73e8d3e8e51109024e52f5636adf5:2106284132,1a277ec9778e51100d203c4002a2cf9d:348308449,05543209698e5110abece273b363b82a:-1700646465,ee9b9ac1a84e511035abc923a2f3417c:-1911402944,8af80681200e5110e54a6f2e209084bb:1367698165,42c8c201930e5110e460f2ccc1da4cdb:1618619563,818642cd7cca51106b1bd9b0fbf8d8a2:-61565269,730202c935ca511092c19d52a85bd519:-1783477472,4b70c28935ca511011c518a4f36cbf0e:1671649600,130f6d85a48a511004ea5b8787687041:1804542298,9aae69c5058a511034914dd7d942736f:-2109744857,487ee1c5f98a5110ac8f08fc6543966a:-1347386694,3c4ce985aa8a51102639d5fce13e30ac:716138462,728b2185488a51109c7ce3d00b3c1ca6:1748251248,a477ed41b68a51108dbae6a8bce894c7:-369259264,ab27a541428a511038cda867527b0f46:-63616850,1d56e501e88a5110a4ad8fb77975554a:1143673601,1ee5a5cdf54a51101e2c5a9cfc2ac92a:-1253195294</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-09-30 16:09:32</sys_created_on>
+        <sys_db_object display_value="" name="sys_script_client">sys_script_client</sys_db_object>
+        <sys_id>86af22f34b9b4253bba786cb3d0c13e1</sys_id>
+        <sys_metadata>04f429cd474a5110e292f2e7536d4348</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Get Members by Group ID</sys_name>
+        <sys_package display_value="Splitwise" source="x_881767_splitwise">534b06d447021110e292f2e7536d438f</sys_package>
+        <sys_parent display_value="Expense">081f584947465110e292f2e7536d433b</sys_parent>
+        <sys_policy/>
+        <sys_scope display_value="Splitwise">534b06d447021110e292f2e7536d438f</sys_scope>
+        <sys_scope_delete display_value="">18b1ccc3dfbf4b7d876f6c0d8952f371</sys_scope_delete>
+        <sys_update_name>sys_script_client_04f429cd474a5110e292f2e7536d4348</sys_update_name>
+        <sys_update_version display_value="sys_script_client_04f429cd474a5110e292f2e7536d4348">8337d36147c21110e292f2e7536d4329</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-09-30 16:09:32</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

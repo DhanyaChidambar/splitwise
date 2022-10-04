@@ -6,7 +6,7 @@
         <action_insert>true</action_insert>
         <action_query>false</action_query>
         <action_update>false</action_update>
-        <active>false</active>
+        <active>true</active>
         <add_message>false</add_message>
         <advanced>true</advanced>
         <change_fields>false</change_fields>
@@ -29,24 +29,30 @@
         <role_conditions/>
         <script><![CDATA[(function executeRule(current, previous /*null when async*/) {
 	var total = current.getValue('amount');
-	gs.info("divide equally "+current.getValue('u_divide_equally')+" "+typeof current.getValue('u_divide_equally'));
-	if(current.getValue('u_divide_equally')=="0"){
+	gs.info("divide equally "+current.getValue('split_type')+" "+typeof current.getValue('split_type'));
+	if(current.getValue('split_type')=="equally_among_some"){
 		gs.info("Dividing unequally");
 		var allMembers=current.getValue('u_user_share_pair').split(",");
 		gs.info('members '+allMembers.length);
 		var each = total/(allMembers.length);
+		var isPaidByInvolved = false;
+
 		for(var i=0;i<allMembers.length;i++){
-			var ex_grp=new GlideRecord('x_881767_splitwise_user_expense');
-			ex_grp.expense=current.getValue('sys_id');
-			ex_grp.share=each;
-			ex_grp.group=current.getValue('group');
-			
-			ex_grp.user=allMembers[i];
-			ex_grp.u_balance=0-each;
-			ex_grp.insert();
+			var spent=0;
+			if(current.getValue('paid_by')==allMembers[i]){
+				spent=total;
+				isPaidByInvolved=true;
+			}
+			updateUserExpenseTable(allMembers[i],each,spent);
 		}
+
+		if(!isPaidByInvolved){
+			//updatePaidBy(current);
+			updateUserExpenseTable(current.getValue('paid_by'),0,current.getValue('amount'));
+		}
+		updateSettlementDetails(current.getValue('group'));
 	}
-	else{
+	else if(current.getValue('split_type')=="equally_with_everyone"){
 		gs.info("Dividing equally");
 		var ug=new GlideRecord('x_881767_splitwise_user_group');
 		ug.addQuery('group',"=",current.getValue('group'));
@@ -58,31 +64,26 @@
 			gs.info("Got the group "+ug.getValue('group'));
 			var member=ug.getValue('sys_id');
 			gs.info('current member '+member);
-			gs.info("paid by ")
-			var ex_grp=new GlideRecord('x_881767_splitwise_user_expense');
-			ex_grp.expense=current.getValue('sys_id');
-			ex_grp.share=each;
-			ex_grp.group=ug.getValue('group');
-
-			ex_grp.user=member;
+			gs.info("paid by "+current.getValue('paid_by'));
+			
 			involvedMembers.push(member);
 			gs.info("added all the values");
-			ex_grp.u_balance=0-each;
-			ex_grp.insert();
+			var spent=0;
+			if(current.getValue('paid_by')==member){
+			
+				spent=total;
+			}
+			
+			gs.info("added all the values");
+			updateUserExpenseTable(member,each,spent);
 		}
-
+		updateSettlementDetails(current.getValue('group'));
+		gs.info("involved members "+involvedMembers.toString()+" "+typeof involvedMembers.toString());
 		current.setValue('u_user_share_pair',involvedMembers.toString());
+		current.update();
 	}
 
-	var expense = new GlideRecord('x_881767_splitwise_user_expense');
-	expense.addQuery('user.sys_id='+current.getValue('paid_by'));
-	expense.addQuery('expense.sys_id='+current.getValue('sys_id'));
-	expense.query();
-	if(expense.next()){
-		expense.setValue('spent',current.getValue('amount'));
-		expense.setValue('u_balance',current.getValue('amount')-expense.getValue('share'));
-		expense.update();
-	}else{
+	function updatePaidBy(current){
 		var ex_grp=new GlideRecord('x_881767_splitwise_user_expense');
 		ex_grp.expense=current.getValue('sys_id');
 
@@ -94,6 +95,122 @@
 		ex_grp.u_balance=current.getValue('amount');
 		ex_grp.insert();
 	}
+	
+	
+	function updateUserExpenseTable(usergroupid,share,spent){
+		var user_exp = new GlideRecord('x_881767_splitwise_user_expense');
+		user_exp.setValue('user',usergroupid);
+		user_exp.setValue('spent',spent);
+		user_exp.setValue('share',share);
+		user_exp.setValue('u_balance',parseFloat(spent)-parseFloat(share));
+		//user_exp.setValue('expense',expense);
+		user_exp.setValue('expense',current.getValue('sys_id'));
+		//user_exp.setValue('group',group);
+		user_exp.setValue('group',current.getValue('group'));
+		user_exp.insert();
+
+		var user_group=new GlideRecord('x_881767_splitwise_user_group');
+		user_group.addQuery('sys_id',usergroupid);
+		user_group.query();
+		gs.info(" rows "+user_group.getRowCount()+" user "+usergroupid);
+		if(user_group.next()){
+
+			var balance=parseFloat(user_group.getValue('balance'));
+			gs.info('current '+balance+" spent "+spent+" share "+share+" "+(spent-share));
+			gs.info(' test '+(balance+spent)+' '+typeof balance+' '+typeof spent)
+			var newBalance=balance+parseFloat(spent)-parseFloat(share);
+			gs.info('after balance '+newBalance);
+			user_group.setValue('balance',newBalance);
+			user_group.update();
+		}
+
+	}
+	
+	function updateSettlementDetails(groupid){
+		gs.info(" inside update settlement "+groupid)
+		var settle=new GlideRecord('x_881767_splitwise_settlement');
+		settle.addQuery('group.sys_id',groupid);
+		settle.query();
+		settle.deleteMultiple();
+
+		var user_group=new GlideRecord('x_881767_splitwise_user_group');
+		user_group.addQuery('group.sys_id',groupid);
+		user_group.query();
+		var settlementDetails = [];
+		var currentuserBalance={};
+		var positive = [];
+		var negative = [];
+		gs.info(" rows "+user_group.getRowCount()+" user "+groupid);
+		while(user_group.next()){
+			var obj={};
+			obj.user=user_group.getValue('user');
+			if(user_group.getValue('balance')<0){
+				obj.balance=0-user_group.getValue('balance');
+				negative.push(obj);
+			}else if(user_group.getValue('balance')>0){
+				obj.balance=user_group.getValue('balance');
+				positive.push(obj);
+			}
+		}
+
+		var pos=0;
+		gs.info("posobj "+JSON.stringify(positive)+" "+JSON.stringify(negative));
+		for(var i=0;i<negative.length;i++){
+			var negObj=negative[i];
+			var posObj=positive[pos];
+			var settleObj={};
+			settleObj.to=[];
+			settleObj.from=negObj.user;
+			gs.info("posobj "+JSON.stringify(posObj)+" "+JSON.stringify(negObj));
+			if(negObj.balance<=posObj.balance){
+				var toObj={};
+				toObj.user=posObj.user;
+				toObj.amount=negObj.balance;
+				updateSettlement(negObj.user,posObj.user,groupid,toObj.amount);
+				settleObj.to.push(toObj);
+				if(posObj.balance>negObj.balance){
+					posObj.balance=posObj.balance-negObj.balance;	
+				}else{
+					pos++;
+				}
+
+			}else if(negObj.balance>posObj.balance){
+				var curBalance=negObj.balance;
+				while(curBalance>0){
+					var toObj={};
+					toObj.user=posObj.user;
+
+					if(posObj.balance>curBalance){
+						toObj.amount=curBalance;
+						posObj.balance=posObj.balance-curBalance;
+					}else{
+						toObj.amount=posObj.balance;
+						pos++;
+						posObj=positive[pos];
+					}
+					curBalance=curBalance-toObj.amount;
+					toObj.status=false;
+					updateSettlement(negObj.user,toObj.user,groupid,toObj.amount);
+					settleObj.to.push(toObj);
+					
+				}
+
+			}
+			settlementDetails.push(settleObj);
+		}
+		
+		gs.info("settlement "+JSON.stringify(settlementDetails));
+	}
+
+	function updateSettlement(from,to,group,amount){
+		gs.info('from :'+from+" to:"+to+" amount:"+amount);
+		var settle=new GlideRecord('x_881767_splitwise_settlement');
+		settle.setValue('from',from);
+		settle.setValue('to',to);
+		settle.setValue('group',group);
+		settle.setValue('amount',amount);
+		settle.insert();
+	}
 })(current, previous);]]></script>
         <sys_class_name>sys_script</sys_class_name>
         <sys_created_by>admin</sys_created_by>
@@ -101,7 +218,7 @@
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>eda8a33147c25110e292f2e7536d43de</sys_id>
-        <sys_mod_count>19</sys_mod_count>
+        <sys_mod_count>41</sys_mod_count>
         <sys_name>insert to user-expense on insert expense</sys_name>
         <sys_overrides/>
         <sys_package display_value="Splitwise" source="x_881767_splitwise">534b06d447021110e292f2e7536d438f</sys_package>
@@ -109,7 +226,7 @@
         <sys_scope display_value="Splitwise">534b06d447021110e292f2e7536d438f</sys_scope>
         <sys_update_name>sys_script_eda8a33147c25110e292f2e7536d43de</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2022-09-27 15:00:27</sys_updated_on>
+        <sys_updated_on>2022-10-01 19:18:26</sys_updated_on>
         <template/>
         <when>after</when>
     </sys_script>

@@ -20,7 +20,7 @@
             <dependent_value/>
             <element>split_type</element>
             <hint/>
-            <inactive>false</inactive>
+            <inactive>true</inactive>
             <label>Equally</label>
             <language>en</language>
             <name>x_881767_splitwise_expense</name>
@@ -31,9 +31,9 @@
             <sys_domain>global</sys_domain>
             <sys_domain_path>/</sys_domain_path>
             <sys_id>e546b7b0471a1d10e292f2e7536d4376</sys_id>
-            <sys_mod_count>0</sys_mod_count>
+            <sys_mod_count>3</sys_mod_count>
             <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2022-09-30 14:06:55</sys_updated_on>
+            <sys_updated_on>2022-09-30 17:35:45</sys_updated_on>
             <value>equally</value>
         </sys_choice>
         <sys_choice action="INSERT_OR_UPDATE">
@@ -41,6 +41,26 @@
             <element>split_type</element>
             <hint/>
             <inactive>false</inactive>
+            <label>Equally with everyone</label>
+            <language>en</language>
+            <name>x_881767_splitwise_expense</name>
+            <sequence>0</sequence>
+            <synonyms/>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-09-30 17:25:23</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>70b3e80d479a1d10e292f2e7536d4368</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-09-30 17:35:45</sys_updated_on>
+            <value>equally_with_everyone</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>split_type</element>
+            <hint/>
+            <inactive>true</inactive>
             <label>By exact share</label>
             <language>en</language>
             <name>x_881767_splitwise_expense</name>
@@ -51,9 +71,9 @@
             <sys_domain>global</sys_domain>
             <sys_domain_path>/</sys_domain_path>
             <sys_id>2546b7b0471a1d10e292f2e7536d4378</sys_id>
-            <sys_mod_count>0</sys_mod_count>
+            <sys_mod_count>3</sys_mod_count>
             <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2022-09-30 14:06:55</sys_updated_on>
+            <sys_updated_on>2022-09-30 17:35:45</sys_updated_on>
             <value>by_share</value>
         </sys_choice>
         <sys_choice action="INSERT_OR_UPDATE">
@@ -61,6 +81,26 @@
             <element>split_type</element>
             <hint/>
             <inactive>false</inactive>
+            <label>Equally among some</label>
+            <language>en</language>
+            <name>x_881767_splitwise_expense</name>
+            <sequence>1</sequence>
+            <synonyms/>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-09-30 17:25:24</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>38b3e80d479a1d10e292f2e7536d4369</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-09-30 17:35:45</sys_updated_on>
+            <value>equally_among_some</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>split_type</element>
+            <hint/>
+            <inactive>true</inactive>
             <label>By Percentage</label>
             <language>en</language>
             <name>x_881767_splitwise_expense</name>
@@ -71,9 +111,9 @@
             <sys_domain>global</sys_domain>
             <sys_domain_path>/</sys_domain_path>
             <sys_id>a146b7b0471a1d10e292f2e7536d4379</sys_id>
-            <sys_mod_count>0</sys_mod_count>
+            <sys_mod_count>3</sys_mod_count>
             <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2022-09-30 14:06:55</sys_updated_on>
+            <sys_updated_on>2022-09-30 17:35:45</sys_updated_on>
             <value>by_percentage</value>
         </sys_choice>
     </sys_choice>

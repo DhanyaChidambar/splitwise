@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_ui_policy">
     <sys_ui_policy action="INSERT_OR_UPDATE">
         <active>true</active>
-        <conditions table="x_881767_splitwise_expense">u_divide_equally=true^EQ<item endquery="false" field="u_divide_equally" goto="false" newquery="false" operator="=" or="false" value="true"/>
+        <conditions table="x_881767_splitwise_expense">split_type=equally_with_everyone^EQ<item display_value="Equally with everyone" endquery="false" field="split_type" goto="false" newquery="false" operator="=" or="false" value="equally_with_everyone"/>
             <item endquery="true" field="" goto="false" newquery="false" operator="=" or="false" value=""/>
         </conditions>
         <description/>
@@ -28,7 +28,7 @@
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>a1c7ff6147461110e292f2e7536d4369</sys_id>
-        <sys_mod_count>2</sys_mod_count>
+        <sys_mod_count>4</sys_mod_count>
         <sys_name>showing members list conditionally</sys_name>
         <sys_overrides/>
         <sys_package display_value="Splitwise" source="x_881767_splitwise">534b06d447021110e292f2e7536d438f</sys_package>
@@ -36,7 +36,7 @@
         <sys_scope display_value="Splitwise">534b06d447021110e292f2e7536d438f</sys_scope>
         <sys_update_name>sys_ui_policy_a1c7ff6147461110e292f2e7536d4369</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2022-09-21 07:11:28</sys_updated_on>
+        <sys_updated_on>2022-09-30 17:39:01</sys_updated_on>
         <table>x_881767_splitwise_expense</table>
         <ui_type>0</ui_type>
         <view/>

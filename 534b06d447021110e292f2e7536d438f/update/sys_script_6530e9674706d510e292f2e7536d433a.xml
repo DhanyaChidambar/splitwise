@@ -36,10 +36,108 @@
 	gs.info("total number of potential rows ",exp_grp.getRowCount());
 	while(exp_grp.next()){
 		gs.info("deleting record "+exp_grp.getDisplayValue('user'));
+		var ug=exp_grp.getValue('user');
+		var curBalance=exp_grp.getValue('u_balance');
+		var user_group=new GlideRecord('x_881767_splitwise_user_group');
+		user_group.addQuery('sys_id',ug);
+		user_group.query();
+		gs.info(" rows "+user_group.getRowCount()+" user "+ug);
+		if(user_group.next()){
+			var newBalance=parseFloat(user_group.getValue('balance'))-parseFloat(curBalance);
+			user_group.setValue('balance',newBalance);
+			user_group.update();
+		}
 		exp_grp.deleteRecord();
 		gs.info("deleted record");
+		
+	}
+	updateSettlementDetails(current.getValue('group'));
+	
+	function updateSettlementDetails(groupid){
+		gs.info(" inside update settlement "+groupid)
+		var settle=new GlideRecord('x_881767_splitwise_settlement');
+		settle.addQuery('group.sys_id',groupid);
+		settle.query();
+		settle.deleteMultiple();
+
+		var user_group=new GlideRecord('x_881767_splitwise_user_group');
+		user_group.addQuery('group.sys_id',groupid);
+		user_group.query();
+		var settlementDetails = [];
+		var currentuserBalance={};
+		var positive = [];
+		var negative = [];
+		gs.info(" rows "+user_group.getRowCount()+" user "+groupid);
+		while(user_group.next()){
+			var obj={};
+			obj.user=user_group.getValue('user');
+			if(user_group.getValue('balance')<0){
+				obj.balance=0-user_group.getValue('balance');
+				negative.push(obj);
+			}else if(user_group.getValue('balance')>0){
+				obj.balance=user_group.getValue('balance');
+				positive.push(obj);
+			}
+		}
+
+		var pos=0;
+		gs.info("posobj "+JSON.stringify(positive)+" "+JSON.stringify(negative));
+		for(var i=0;i<negative.length;i++){
+			var negObj=negative[i];
+			var posObj=positive[pos];
+			var settleObj={};
+			settleObj.to=[];
+			settleObj.from=negObj.user;
+			gs.info("posobj "+JSON.stringify(posObj)+" "+JSON.stringify(negObj));
+			if(negObj.balance<=posObj.balance){
+				var toObj={};
+				toObj.user=posObj.user;
+				toObj.amount=negObj.balance;
+				updateSettlement(negObj.user,posObj.user,groupid,toObj.amount);
+				settleObj.to.push(toObj);
+				if(posObj.balance>negObj.balance){
+					posObj.balance=posObj.balance-negObj.balance;	
+				}else{
+					pos++;
+				}
+
+			}else if(negObj.balance>posObj.balance){
+				var curBalance=negObj.balance;
+				while(curBalance>0){
+					var toObj={};
+					toObj.user=posObj.user;
+
+					if(posObj.balance>curBalance){
+						toObj.amount=curBalance;
+						posObj.balance=posObj.balance-curBalance;
+					}else{
+						toObj.amount=posObj.balance;
+						pos++;
+						posObj=positive[pos];
+					}
+					curBalance=curBalance-toObj.amount;
+					toObj.status=false;
+					updateSettlement(negObj.user,toObj.user,groupid,toObj.amount);
+					settleObj.to.push(toObj);
+
+				}
+
+			}
+			settlementDetails.push(settleObj);
+		}
+
+		gs.info("settlement "+JSON.stringify(settlementDetails));
 	}
 
+	function updateSettlement(from,to,group,amount){
+		gs.info('from :'+from+" to:"+to+" amount:"+amount);
+		var settle=new GlideRecord('x_881767_splitwise_settlement');
+		settle.setValue('from',from);
+		settle.setValue('to',to);
+		settle.setValue('group',group);
+		settle.setValue('amount',amount);
+		settle.insert();
+	}
 })(current, previous);]]></script>
         <sys_class_name>sys_script</sys_class_name>
         <sys_created_by>admin</sys_created_by>
@@ -47,7 +145,7 @@
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>6530e9674706d510e292f2e7536d433a</sys_id>
-        <sys_mod_count>3</sys_mod_count>
+        <sys_mod_count>8</sys_mod_count>
         <sys_name>Before delete expense</sys_name>
         <sys_overrides/>
         <sys_package display_value="Splitwise" source="x_881767_splitwise">534b06d447021110e292f2e7536d438f</sys_package>
@@ -55,7 +153,7 @@
         <sys_scope display_value="Splitwise">534b06d447021110e292f2e7536d438f</sys_scope>
         <sys_update_name>sys_script_6530e9674706d510e292f2e7536d433a</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2022-09-26 06:24:02</sys_updated_on>
+        <sys_updated_on>2022-10-01 19:16:15</sys_updated_on>
         <template/>
         <when>before</when>
     </sys_script>

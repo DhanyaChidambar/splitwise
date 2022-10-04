@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_script_client">
+    <sys_script_client action="DELETE">
+        <active>false</active>
+        <applies_extended>false</applies_extended>
+        <condition/>
+        <description/>
+        <field>u_divide_equally</field>
+        <global>true</global>
+        <isolate_script>false</isolate_script>
+        <messages/>
+        <name>Show and Update user-amount dictionary </name>
+        <order/>
+        <script><![CDATA[function onChange(control, oldValue, newValue, isLoading, isTemplate) {
+   alert("value changed to initial"+newValue+" "+isLoading+" "+typeof newValue);
+   if (isLoading || newValue === '') {
+      return;
+   }
+//g_form.setValue("u_user_share_pair", JSON.stringify({"Dhanya":"0"}));
+	if(newValue==='false'){
+		alert("value changed to "+newValue);
+		g_form.setValue("u_user_share_pair", JSON.stringify({Dhanya:"0"}));
+	}
+	
+	//Type appropriate comment here, and begin script below
+   
+}]]></script>
+        <sys_class_name>sys_script_client</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-09-20 07:27:34</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>24a9b2e147421110e292f2e7536d438a</sys_id>
+        <sys_mod_count>10</sys_mod_count>
+        <sys_name>Show and Update user-amount dictionary </sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Splitwise" source="x_881767_splitwise">534b06d447021110e292f2e7536d438f</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Splitwise">534b06d447021110e292f2e7536d438f</sys_scope>
+        <sys_update_name>sys_script_client_24a9b2e147421110e292f2e7536d438a</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-09-20 09:22:11</sys_updated_on>
+        <table>x_881767_splitwise_expense</table>
+        <type>onChange</type>
+        <ui_type>10</ui_type>
+        <view/>
+    </sys_script_client>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Splitwise">534b06d447021110e292f2e7536d438f</application>
+        <file_path/>
+        <instance_id>f9468166dbbfd3808264f70fbf9619e4</instance_id>
+        <instance_name>dev70031</instance_name>
+        <name>sys_script_client_24a9b2e147421110e292f2e7536d438a</name>
+        <payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update sys_domain="global" table="sys_script_client"&gt;&lt;sys_script_client action="INSERT_OR_UPDATE"&gt;&lt;active&gt;false&lt;/active&gt;&lt;applies_extended&gt;false&lt;/applies_extended&gt;&lt;condition/&gt;&lt;description/&gt;&lt;field&gt;u_divide_equally&lt;/field&gt;&lt;global&gt;true&lt;/global&gt;&lt;isolate_script&gt;false&lt;/isolate_script&gt;&lt;messages/&gt;&lt;name&gt;Show and Update user-amount dictionary &lt;/name&gt;&lt;order/&gt;&lt;script&gt;&lt;![CDATA[function onChange(control, oldValue, newValue, isLoading, isTemplate) {
+   alert("value changed to initial"+newValue+" "+isLoading+" "+typeof newValue);
+   if (isLoading || newValue === '') {
+      return;
+   }
+//g_form.setValue("u_user_share_pair", JSON.stringify({"Dhanya":"0"}));
+	if(newValue==='false'){
+		alert("value changed to "+newValue);
+		g_form.setValue("u_user_share_pair", JSON.stringify({Dhanya:"0"}));
+	}
+	
+	//Type appropriate comment here, and begin script below
+   
+}]]&gt;&lt;/script&gt;&lt;sys_class_name&gt;sys_script_client&lt;/sys_class_name&gt;&lt;sys_created_by&gt;admin&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2022-09-20 07:27:34&lt;/sys_created_on&gt;&lt;sys_domain&gt;global&lt;/sys_domain&gt;&lt;sys_domain_path&gt;/&lt;/sys_domain_path&gt;&lt;sys_id&gt;24a9b2e147421110e292f2e7536d438a&lt;/sys_id&gt;&lt;sys_mod_count&gt;10&lt;/sys_mod_count&gt;&lt;sys_name&gt;Show and Update user-amount dictionary &lt;/sys_name&gt;&lt;sys_overrides/&gt;&lt;sys_package display_value="Splitwise" source="x_881767_splitwise"&gt;534b06d447021110e292f2e7536d438f&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="Splitwise"&gt;534b06d447021110e292f2e7536d438f&lt;/sys_scope&gt;&lt;sys_update_name&gt;sys_script_client_24a9b2e147421110e292f2e7536d438a&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;admin&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2022-09-20 09:22:11&lt;/sys_updated_on&gt;&lt;table&gt;x_881767_splitwise_expense&lt;/table&gt;&lt;type&gt;onChange&lt;/type&gt;&lt;ui_type&gt;10&lt;/ui_type&gt;&lt;view/&gt;&lt;/sys_script_client&gt;&lt;/record_update&gt;</payload>
+        <payload_hash>964962255</payload_hash>
+        <record_name>Show and Update user-amount dictionary </record_name>
+        <reverted_from/>
+        <source>66dff24547ce5110e292f2e7536d43e0</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-09-20 09:22:11</sys_created_on>
+        <sys_id>c1355b6d47821110e292f2e7536d43d1</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>1835a34778f0000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-09-20 09:22:11</sys_updated_on>
+        <type>Client Script</type>
+        <update_guid>c9355b6dd8821110e9beb2b4aad3dfd0</update_guid>
+        <update_guid_history>c9355b6dd8821110e9beb2b4aad3dfd0:964962255,881c87a531821110675959c1fbd7798b:-267965292,6b5a87e136821110ec997ee62b7b3388:1801548813,dd69c7e13e8211107aa1117abcc23386:1282448927,1d4987e1cd821110d6d1d957dbd88081:1496836087,c07cfe65614211102094bb1a3fcd9bf8:285328932,342c7665fd42111066c4dbfd223b8ede:422754604,affb7a6560421110962849a20ef8c098:238080126,43cb3ea16d421110f509d61f9adf787d:-1263430754,159bfa25554211102f49e630b297b319:-835581260,02fa322589421110f65eae716d7a8a24:-1617373102</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-09-30 16:09:01</sys_created_on>
+        <sys_db_object display_value="" name="sys_script_client">sys_script_client</sys_db_object>
+        <sys_id>0fe508701ef94af89aa64232f93393a1</sys_id>
+        <sys_metadata>24a9b2e147421110e292f2e7536d438a</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Show and Update user-amount dictionary </sys_name>
+        <sys_package display_value="Splitwise" source="x_881767_splitwise">534b06d447021110e292f2e7536d438f</sys_package>
+        <sys_parent display_value="Expense">081f584947465110e292f2e7536d433b</sys_parent>
+        <sys_policy/>
+        <sys_scope display_value="Splitwise">534b06d447021110e292f2e7536d438f</sys_scope>
+        <sys_scope_delete display_value="">18b1ccc3dfbf4b7d876f6c0d8952f371</sys_scope_delete>
+        <sys_update_name>sys_script_client_24a9b2e147421110e292f2e7536d438a</sys_update_name>
+        <sys_update_version display_value="sys_script_client_24a9b2e147421110e292f2e7536d438a">c1355b6d47821110e292f2e7536d43d1</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-09-30 16:09:01</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

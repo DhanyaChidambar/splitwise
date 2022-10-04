@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_column">
+    <sp_column action="DELETE">
+        <class_name/>
+        <order>33</order>
+        <size>1</size>
+        <size_lg/>
+        <size_sm/>
+        <size_xs/>
+        <sp_row display_value="1">60cc511747469510e292f2e7536d4365</sp_row>
+        <sys_class_name>sp_column</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-10-03 05:42:26</sys_created_on>
+        <sys_id>b89fd97147dadd10e292f2e7536d43b4</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>33</sys_name>
+        <sys_package display_value="Splitwise" source="x_881767_splitwise">534b06d447021110e292f2e7536d438f</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Splitwise">534b06d447021110e292f2e7536d438f</sys_scope>
+        <sys_update_name>sp_column_b89fd97147dadd10e292f2e7536d43b4</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-10-03 05:43:30</sys_updated_on>
+    </sp_column>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Splitwise">534b06d447021110e292f2e7536d438f</application>
+        <file_path/>
+        <instance_id>f9468166dbbfd3808264f70fbf9619e4</instance_id>
+        <instance_name>dev70031</instance_name>
+        <name>sp_column_b89fd97147dadd10e292f2e7536d43b4</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_column"><sp_column action="INSERT_OR_UPDATE"><class_name/><order>33</order><size>1</size><size_lg/><size_sm/><size_xs/><sp_row display_value="1">60cc511747469510e292f2e7536d4365</sp_row><sys_class_name>sp_column</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2022-10-03 05:42:26</sys_created_on><sys_id>b89fd97147dadd10e292f2e7536d43b4</sys_id><sys_mod_count>2</sys_mod_count><sys_name>33</sys_name><sys_package display_value="Splitwise" source="x_881767_splitwise">534b06d447021110e292f2e7536d438f</sys_package><sys_policy/><sys_scope display_value="Splitwise">534b06d447021110e292f2e7536d438f</sys_scope><sys_update_name>sp_column_b89fd97147dadd10e292f2e7536d43b4</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2022-10-03 05:43:30</sys_updated_on></sp_column></record_update>]]></payload>
+        <payload_hash>-463959442</payload_hash>
+        <record_name>33</record_name>
+        <reverted_from/>
+        <source>66dff24547ce5110e292f2e7536d43e0</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-10-03 05:43:30</sys_created_on>
+        <sys_id>a4df51b147dadd10e292f2e7536d43a1</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>1839c5eecdf0000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-10-03 05:43:30</sys_updated_on>
+        <type>Column</type>
+        <update_guid>acdf51b120dadd1093cfdbd80b2a21a0</update_guid>
+        <update_guid_history>acdf51b120dadd1093cfdbd80b2a21a0:-463959442,0bcf11b1b7dadd1049650557836b13eb:-1594527538,f49fd97129dadd10863ed7b34f90b7b5:-679349842</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete display_value="33">19df91b147dadd10e292f2e7536d43e6</sys_audit_delete>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-10-03 05:43:33</sys_created_on>
+        <sys_db_object display_value="" name="sp_column">sp_column</sys_db_object>
+        <sys_id>644b9d9c481345e8924b217cf7e38844</sys_id>
+        <sys_metadata>b89fd97147dadd10e292f2e7536d43b4</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>33</sys_name>
+        <sys_package display_value="Splitwise" source="x_881767_splitwise">534b06d447021110e292f2e7536d438f</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Splitwise">534b06d447021110e292f2e7536d438f</sys_scope>
+        <sys_scope_delete display_value="">18b1ccc3dfbf4b7d876f6c0d8952f371</sys_scope_delete>
+        <sys_update_name>sp_column_b89fd97147dadd10e292f2e7536d43b4</sys_update_name>
+        <sys_update_version display_value="sp_column_b89fd97147dadd10e292f2e7536d43b4">a4df51b147dadd10e292f2e7536d43a1</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-10-03 05:43:33</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>
