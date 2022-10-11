@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_instance_link">
+    <sp_instance_link action="DELETE">
+        <active>true</active>
+        <class_name/>
+        <color>default</color>
+        <css/>
+        <glyph>home</glyph>
+        <id/>
+        <kb_article/>
+        <kb_category/>
+        <kb_topic/>
+        <order>1</order>
+        <roles/>
+        <sc_cat_item/>
+        <sc_category/>
+        <short_description/>
+        <size>md</size>
+        <sp_column display_value="1">da44ad8047ee9110e292f2e7536d43fe</sp_column>
+        <sp_page/>
+        <sp_widget display_value="Icon Link">3caa67afcb13020000f8d856634c9c2e</sp_widget>
+        <sys_class_name>sp_instance_link</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-10-10 05:49:29</sys_created_on>
+        <sys_id>5c542d8047ee9110e292f2e7536d4377</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>Splitwise</sys_name>
+        <sys_package display_value="Splitwise" source="x_881767_splitwise">534b06d447021110e292f2e7536d438f</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Splitwise">534b06d447021110e292f2e7536d438f</sys_scope>
+        <sys_update_name>sp_instance_link_5c542d8047ee9110e292f2e7536d4377</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-10-10 05:54:45</sys_updated_on>
+        <title>Splitwise</title>
+        <type>page</type>
+        <url/>
+        <widget_parameters><![CDATA[{
+	"link_template": {
+		"value": "Top Icon",
+		"displayValue": "Top Icon"
+	}
+}]]></widget_parameters>
+    </sp_instance_link>
+    <sys_translated_text action="DELETE" query="documentkey=5c542d8047ee9110e292f2e7536d4377"/>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Splitwise">534b06d447021110e292f2e7536d438f</application>
+        <file_path/>
+        <instance_id>f9468166dbbfd3808264f70fbf9619e4</instance_id>
+        <instance_name>dev70031</instance_name>
+        <name>sp_instance_link_5c542d8047ee9110e292f2e7536d4377</name>
+        <payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="sp_instance_link"&gt;&lt;sp_instance_link action="INSERT_OR_UPDATE"&gt;&lt;active&gt;true&lt;/active&gt;&lt;class_name/&gt;&lt;color&gt;default&lt;/color&gt;&lt;css/&gt;&lt;glyph&gt;home&lt;/glyph&gt;&lt;id/&gt;&lt;kb_article/&gt;&lt;kb_category/&gt;&lt;kb_topic/&gt;&lt;order&gt;1&lt;/order&gt;&lt;roles/&gt;&lt;sc_cat_item/&gt;&lt;sc_category/&gt;&lt;short_description/&gt;&lt;size&gt;md&lt;/size&gt;&lt;sp_column display_value="1"&gt;da44ad8047ee9110e292f2e7536d43fe&lt;/sp_column&gt;&lt;sp_page/&gt;&lt;sp_widget display_value="Icon Link"&gt;3caa67afcb13020000f8d856634c9c2e&lt;/sp_widget&gt;&lt;sys_class_name&gt;sp_instance_link&lt;/sys_class_name&gt;&lt;sys_created_by&gt;admin&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2022-10-10 05:49:29&lt;/sys_created_on&gt;&lt;sys_id&gt;5c542d8047ee9110e292f2e7536d4377&lt;/sys_id&gt;&lt;sys_mod_count&gt;2&lt;/sys_mod_count&gt;&lt;sys_name&gt;Splitwise&lt;/sys_name&gt;&lt;sys_package display_value="Splitwise" source="x_881767_splitwise"&gt;534b06d447021110e292f2e7536d438f&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="Splitwise"&gt;534b06d447021110e292f2e7536d438f&lt;/sys_scope&gt;&lt;sys_update_name&gt;sp_instance_link_5c542d8047ee9110e292f2e7536d4377&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;admin&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2022-10-10 05:54:45&lt;/sys_updated_on&gt;&lt;title&gt;Splitwise&lt;/title&gt;&lt;type&gt;page&lt;/type&gt;&lt;url/&gt;&lt;widget_parameters&gt;&lt;![CDATA[{
+	"link_template": {
+		"value": "Top Icon",
+		"displayValue": "Top Icon"
+	}
+}]]&gt;&lt;/widget_parameters&gt;&lt;/sp_instance_link&gt;&lt;sys_translated_text action="delete_multiple" query="documentkey=5c542d8047ee9110e292f2e7536d4377"/&gt;&lt;/record_update&gt;</payload>
+        <payload_hash>-1450383206</payload_hash>
+        <record_name>Splitwise</record_name>
+        <reverted_from/>
+        <source>66dff24547ce5110e292f2e7536d43e0</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-10-10 05:54:45</sys_created_on>
+        <sys_id>a185e10447ee9110e292f2e7536d4369</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>183c075be920000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-10-10 05:54:45</sys_updated_on>
+        <type>Instance with Link</type>
+        <update_guid>a985e10498ee9110b2a6463a13e8eb68</update_guid>
+        <update_guid_history>a985e10498ee9110b2a6463a13e8eb68:-1450383206,2064698007ee9110f1a7a93e262059bf:1914943314,5c5421c01dee9110f72f4b6184938c4f:1918199350</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete display_value="Splitwise">c6a5e10447ee9110e292f2e7536d437d</sys_audit_delete>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-10-10 05:55:20</sys_created_on>
+        <sys_db_object display_value="" name="sp_instance_link">sp_instance_link</sys_db_object>
+        <sys_id>0b4cefc7a7f04c80a939800ead342400</sys_id>
+        <sys_metadata>5c542d8047ee9110e292f2e7536d4377</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Splitwise</sys_name>
+        <sys_package display_value="Splitwise" source="x_881767_splitwise">534b06d447021110e292f2e7536d438f</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Splitwise">534b06d447021110e292f2e7536d438f</sys_scope>
+        <sys_scope_delete display_value="">18b1ccc3dfbf4b7d876f6c0d8952f371</sys_scope_delete>
+        <sys_update_name>sp_instance_link_5c542d8047ee9110e292f2e7536d4377</sys_update_name>
+        <sys_update_version display_value="sp_instance_link_5c542d8047ee9110e292f2e7536d4377">a185e10447ee9110e292f2e7536d4369</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-10-10 05:55:20</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

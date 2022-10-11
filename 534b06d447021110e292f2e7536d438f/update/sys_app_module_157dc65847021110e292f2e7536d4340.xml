@@ -14,17 +14,17 @@
         <mobile_view_name>Mobile</mobile_view_name>
         <name>x_881767_splitwise_expense_group</name>
         <order/>
-        <override_menu_roles>false</override_menu_roles>
+        <override_menu_roles>true</override_menu_roles>
         <query/>
         <report/>
-        <roles>x_881767_splitwise.expense_group_user</roles>
+        <roles>x_881767_splitwise.admin,x_881767_splitwise.user</roles>
         <sys_class_name>sys_app_module</sys_class_name>
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2022-09-16 06:58:01</sys_created_on>
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>157dc65847021110e292f2e7536d4340</sys_id>
-        <sys_mod_count>0</sys_mod_count>
+        <sys_mod_count>2</sys_mod_count>
         <sys_name>Create New Group</sys_name>
         <sys_overrides/>
         <sys_package display_value="Splitwise" source="x_881767_splitwise">534b06d447021110e292f2e7536d438f</sys_package>
@@ -32,7 +32,7 @@
         <sys_scope display_value="Splitwise">534b06d447021110e292f2e7536d438f</sys_scope>
         <sys_update_name>sys_app_module_157dc65847021110e292f2e7536d4340</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2022-09-16 06:58:01</sys_updated_on>
+        <sys_updated_on>2022-10-10 03:43:29</sys_updated_on>
         <timeline_page/>
         <title>Create New Group</title>
         <uncancelable>false</uncancelable>

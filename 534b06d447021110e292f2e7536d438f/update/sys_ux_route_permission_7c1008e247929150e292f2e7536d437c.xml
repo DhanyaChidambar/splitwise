@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ux_route_permission">
+    <sys_ux_route_permission action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <groups/>
+        <roles/>
+        <route display_value="Splitwise representations">ac1008e247929150e292f2e7536d4379</route>
+        <sys_class_name>sys_ux_route_permission</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-10-05 06:40:37</sys_created_on>
+        <sys_id>7c1008e247929150e292f2e7536d437c</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="Splitwise" source="x_881767_splitwise">534b06d447021110e292f2e7536d438f</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Splitwise">534b06d447021110e292f2e7536d438f</sys_scope>
+        <sys_update_name>sys_ux_route_permission_7c1008e247929150e292f2e7536d437c</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-10-05 06:40:37</sys_updated_on>
+        <type>read</type>
+        <users/>
+    </sys_ux_route_permission>
+</record_update>

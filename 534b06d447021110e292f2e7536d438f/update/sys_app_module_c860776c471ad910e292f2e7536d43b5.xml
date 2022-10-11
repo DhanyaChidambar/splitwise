@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_app_module">
     <sys_app_module action="INSERT_OR_UPDATE">
-        <active>true</active>
+        <active>false</active>
         <application display_value="Splitwise">773d465847021110e292f2e7536d43b4</application>
         <assessment/>
         <device_type/>
-        <filter table="x_881767_splitwise_expense">group.membersDYNAMIC90d1921e5f510100a9ad2572f2b477fe^EQ<item endquery="false" field="group.members" goto="false" newquery="false" operator="DYNAMIC" or="false" value="90d1921e5f510100a9ad2572f2b477fe"/>
-            <item endquery="true" field="" goto="false" newquery="false" operator="=" or="false" value=""/>
-        </filter>
+        <filter/>
         <hint/>
         <homepage/>
         <image/>
@@ -16,17 +14,17 @@
         <mobile_view_name>Mobile</mobile_view_name>
         <name>x_881767_splitwise_expense</name>
         <order/>
-        <override_menu_roles>false</override_menu_roles>
+        <override_menu_roles>true</override_menu_roles>
         <query/>
         <report/>
-        <roles>x_881767_splitwise.user</roles>
+        <roles>x_881767_splitwise.user,x_881767_splitwise.admin</roles>
         <sys_class_name>sys_app_module</sys_class_name>
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2022-09-29 19:03:18</sys_created_on>
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>c860776c471ad910e292f2e7536d43b5</sys_id>
-        <sys_mod_count>1</sys_mod_count>
+        <sys_mod_count>4</sys_mod_count>
         <sys_name>Create Expense</sys_name>
         <sys_overrides/>
         <sys_package display_value="Splitwise" source="x_881767_splitwise">534b06d447021110e292f2e7536d438f</sys_package>
@@ -34,7 +32,7 @@
         <sys_scope display_value="Splitwise">534b06d447021110e292f2e7536d438f</sys_scope>
         <sys_update_name>sys_app_module_c860776c471ad910e292f2e7536d43b5</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2022-09-29 19:03:53</sys_updated_on>
+        <sys_updated_on>2022-10-10 03:46:39</sys_updated_on>
         <timeline_page/>
         <title>Create Expense</title>
         <uncancelable>false</uncancelable>

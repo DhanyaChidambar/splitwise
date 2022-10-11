@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_instance">
+    <sp_instance action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <class_name/>
+        <color>primary</color>
+        <css/>
+        <glyph/>
+        <id/>
+        <order>1</order>
+        <roles/>
+        <short_description/>
+        <size>md</size>
+        <sp_column display_value="1">5e11853e47121110e292f2e7536d436f</sp_column>
+        <sp_widget display_value="link-button">abc50de6d702120023c84f80de61036a</sp_widget>
+        <sys_class_name>sp_instance</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-10-06 06:03:26</sys_created_on>
+        <sys_id>b121cdb647521110e292f2e7536d4344</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="Splitwise" source="x_881767_splitwise">534b06d447021110e292f2e7536d438f</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Splitwise">534b06d447021110e292f2e7536d438f</sys_scope>
+        <sys_update_name>sp_instance_b121cdb647521110e292f2e7536d4344</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-10-06 06:06:11</sys_updated_on>
+        <title/>
+        <url/>
+        <widget_parameters><![CDATA[{
+	"href": {
+		"value": "https://dev70031.service-now.com/$spd.do#/sp_config/editor/splitwise_home/a9af0aea479a9150e292f2e7536d437a",
+		"displayValue": "https://dev70031.service-now.com/$spd.do#/sp_config/editor/splitwise_home/a9af0aea479a9150e292f2e7536d437a"
+	},
+	"button_text": {
+		"value": "Open Dashboard",
+		"displayValue": "Open Dashboard"
+	}
+}]]></widget_parameters>
+    </sp_instance>
+    <sys_translated_text action="delete_multiple" query="documentkey=b121cdb647521110e292f2e7536d4344"/>
+</record_update>

@@ -9,15 +9,18 @@
 	c.data.newexpense.shares={};
 	c.data.newgroup.members=[];
 	c.data.showSettledMessage=false;
-	c.data.splitOption={};
-	c.data.splitOption.name="Equally";
-	c.data.splitOption.value="equally_with_everyone";
+	c.data.newexpense.split_type_value="Equally with everyone";
 	c.data.showActions = false;
 	c.data.oldexpense = {};
 	c.data.expenseOp='';
 
+
 	$scope.member = {
 		name: 'member'
+
+	};
+	$scope.member = {
+		name: 'editedMember'
 
 	};
 
@@ -42,6 +45,7 @@
 
 	c.data.action="dashboard";
 	displayDashBoard(c.data.action);
+	//getWidget();
 	$scope.$on("field.change", function(evt, parms) {
 		if (parms.field.name == 'member'){
 			var member = {};
@@ -53,6 +57,8 @@
 		}else if(parms.field.name == 'groupMember'){
 			console.log(parms);
 			c.data.newexpense.paid_by=parms.newValue;
+		}else if(parms.field.name=='editedMember'){
+			c.data.currentGroup.involved.push(parms.newValue);
 		}
 
 
@@ -99,7 +105,7 @@
 			groupId:groupId
 		}).then(function(r) {
 			console.log(r.data);
-			c.data.members = r.data.members;
+
 			c.data.nmembers=r.data.nmembers;
 		});
 	}
@@ -125,6 +131,7 @@
 
 	$rootScope.$on('openDashboard',function(event,data){
 		c.data.action="dashboard";
+		c.data.getUsersByRoleQuery='roles=x_881767_splitwise.user^ORroles=x_881767_splitwise.admin';
 		displayDashBoard(data);
 	});
 	$rootScope.$on('showGroupPage',function(event,data){
@@ -136,13 +143,42 @@
 		displayGroupMembers(data.groupId);
 		displayGroupExpenses(data.groupId);
 		c.data.getUsersByGroupQuery='group.sys_id='+data.groupId;
-		c.data.splitOption.value='equally_with_everyone';
-		c.data.splitOption.name='Equally';
+		c.data.newexpense.split_type_value='Equally with everyone';
+
 
 	});
-	$rootScope.$on('openAllExpenses',function(event,data){
-		c.data.action=data;
-	});
+
+	
+	c.loadCurrentGroup =function(){
+		//c.data.action = 'editGroup';
+		c.data.currentGroup={};
+		c.data.currentGroup.name = c.data.groupName;
+		c.data.currentGroup.groupId=c.data.groupId;
+		//console.log("about to open group "+c.data.groupId+" "+c.data.groupName);
+		//c.data.currentGroup.members=data.members;
+		c.data.getUsersByRoleQuery='roles=x_881767_splitwise.user^ORroles=x_881767_splitwise.admin';
+		c.server.get({
+			action: 'getGroupMembers',
+			groupId:c.data.currentGroup.groupId
+		}).then(function(r) {
+			console.log(r.data);
+
+
+			c.data.currentGroup.involved =[];
+			c.data.currentGroup.members = [];
+			//r.data.nmembers;
+			for(var i=0;i<r.data.nmembers.length;i++){
+				c.data.currentGroup.involved.push(r.data.nmembers[i].member.sys_id);
+				var member={};
+				member.name=r.data.nmembers[i].member.name;
+				member.sys_id=r.data.nmembers[i].member.sys_id;
+				member.balance=r.data.nmembers[i].member.balance;
+				c.data.currentGroup.members.push(member);
+			}
+		});
+	}
+
+
 
 	c.removeMember = function(member){
 		console.log("about to remove "+member);
@@ -150,6 +186,23 @@
 		var index = c.data.newgroup.members.indexOf(member);
 		if (index >= 0) {
 			c.data.newgroup.members.splice( index, 1 );
+		}
+	}
+
+	c.editMember = function(member){
+		console.log("about to edit "+member);
+		if(member.balance!=0){
+			spUtil.addErrorMessage("only members whose balance is zero can be removed!! Settle up the balance and try again.")
+			return;
+		}
+		//c.data.members.remove(member);
+		var index = c.data.currentGroup.involved.indexOf(member.sys_id);
+		if (index >= 0) {
+			c.data.currentGroup.involved.splice( index, 1 );
+		}
+		var membersIndex = c.data.currentGroup.members.indexOf(member);
+		if (membersIndex >= 0) {
+			c.data.currentGroup.members.splice( index, 1 );
 		}
 	}
 
@@ -168,34 +221,65 @@
 		});
 	}
 
+	c.editGroup = function(){
+		console.log('group name ',c.data.currentGroup.name);
+		console.log('members ',c.data.currentGroup.members);
+		c.data.currentGroup.showModal=false;
+		c.server.get({
+			action:'editGroup',
+			members:c.data.currentGroup.involved.toString(),
+			name:c.data.currentGroup.name,
+			groupId:c.data.currentGroup.groupId
+		}).then(function(r){
+			console.log("success");
+			spUtil.addInfoMessage("Successfully Updated the group "+c.data.currentGroup.name);
+			c.data.currentGroup={};
+			c.data.currentGroup.involved=[];
+			c.data.currentGroup.members=[];
+
+		});
+	}
+
 	c.createExpense = function(){
 		console.log('group id '+c.data.groupId+' '+c.data.members);
-
-		if(c.data.splitOption.value=='equally_among_some'){
-			if(Object.keys(c.data.newexpense.shares).length==0){
-				spUtil.addErrorMessage(" At least one user must be part of the expense, add members involved");
+		if(c.data.oldexpense.amount!=c.data.newexpense.amount
+			 && c.data.newexpense.split_type_value!='Equally with everyone' ){
+			if(!c.data.newexpense.shares){
+				spUtil.addErrorMessage(" Update the share accordingly");
 				return;
-			}
+			}else{
+				if(c.data.newexpense.split_type_value=='Equally among some'){
+					if(Object.keys(c.data.newexpense.shares).length==0){
+						spUtil.addErrorMessage(" At least one user must be part of the expense, add members involved");
+						return;
+					}
 
-		}else if(c.data.splitOption.value=='byShare'){
-			var total=0;
-			for(var i=0;i<Object.keys(c.data.newexpense.shares).length;i++){
+				}else if(c.data.newexpense.split_type_value=='By exact share'){
+					var total=0;
+					for(var i=0;i<Object.keys(c.data.newexpense.shares).length;i++){
+						if(c.data.newexpense.shares[Object.keys(c.data.newexpense.shares)[i]]){
+							total=parseFloat(total)+parseFloat(c.data.newexpense.shares[Object.keys(c.data.newexpense.shares)[i]]);
+						}
 
-				total=parseFloat(total)+parseFloat(c.data.newexpense.shares[Object.keys(c.data.newexpense.shares)[i]]);
-			}
-			if(total!=c.data.newexpense.amount){
-				spUtil.addErrorMessage(" Total of shares do not sum up to the amount spent, please modify accordingly");
-				return;
-			}
+					}
+					if(total!=c.data.newexpense.amount){
+						spUtil.addErrorMessage(" Total of shares do not sum up to the amount spent, please modify accordingly");
+						return;
+					}
 
-		}else if(c.data.splitOption.value=='byPercentage'){
-			var total=0;
-			for(var i=0;i<Object.keys(c.data.newexpense.shares).length;i++){
-				total=total+parseFloat(c.data.newexpense.shares[Object.keys(c.data.newexpense.shares)[i]]);
-			}
-			if(total!=100){
-				spUtil.addErrorMessage(" Total % shares do not sum up to the amount spent, please modify accordingly");
-				return;
+				}else if(c.data.newexpense.split_type_value=='By percentage'){
+					var total=0;
+					for(var i=0;i<Object.keys(c.data.newexpense.shares).length;i++){
+						if(c.data.newexpense.shares[Object.keys(c.data.newexpense.shares)[i]]){
+							total=total+parseFloat(c.data.newexpense.shares[Object.keys(c.data.newexpense.shares)[i]]);	
+						}
+
+					}
+					if(total!=100){
+						spUtil.addErrorMessage(" Total % shares do not sum up to the amount spent, please modify accordingly");
+						return;
+					}
+				}	
 			}
 		}
 		if(c.data.expenseOp=='edit'){
@@ -203,27 +287,28 @@
 				action:'editExpense',
 				newexpense:c.data.newexpense,
 				oldexpense:c.data.oldexpense,
-				splitOption:c.data.splitOption.value,
+				splitOption:c.data.newexpense.split_type_value,
 				groupId:c.data.groupId,
 				shares:c.data.newexpense.shares,
-				expenseId:c.data.oldexpense.expenseid,
-				members:c.data.members
+				expenseId:c.data.oldexpense.sys_id,
+				members:c.data.nmembers
 			}).then(function(r){
-				spUtil.addInfoMessage("New Expense created");
+				spUtil.addInfoMessage("Expense updated successfully");
 				c.data.newexpense={}
 				c.data.expenseOp='';
 				c.data.oldexpense={};
 			});
-		}else{
+		}
+		else{
 
 
 			c.server.get({
 				action:'createExpense',
 				expenseData:c.data.newexpense,
-				splitOption:c.data.splitOption.value,
+				splitOption:c.data.newexpense.split_type_value,
 				groupId:c.data.groupId,
 				shares:c.data.newexpense.shares,
-				members:c.data.members
+				members:c.data.nmembers
 			}).then(function(r){
 				spUtil.addInfoMessage("New Expense created");
 				c.data.newexpense={}
@@ -234,10 +319,9 @@
 	}
 
 
-	c.showSplitOption = function(value,name){
-		c.data.splitOption.value=value;
+	c.showSplitOption = function(value){
+		c.data.newexpense.split_type_value=value;
 		c.data.newexpense.shares={};
-		c.data.splitOption.name=name;
 	}
 
 	c.loadSettlement = function(){
@@ -263,6 +347,7 @@
 		}).then(function(r){
 			if(r.data.accept_success==true){
 				c.data.mySettlement[index].settled=1;
+				spUtil.addInfoMessage("Accepted payment of Rs. "+settle.amount+" from "+settle.from);
 			}
 		});
 	}
@@ -275,21 +360,32 @@
 		}).then(function(r){
 			if(r.data.accept_success==true){
 				c.data.mySettlement[index].settled=1;
+				spUtil.addInfoMessage("Recorded payment of Rs. "+settle.amount+" to "+settle.to);
 			}
 		});
 	}
 
-	c.deleteExpense = function(expenseId){
-		console.log(" Expense we are going to delete "+expenseId);
+	c.deleteExpense = function(){
+		console.log(" Expense we are going to delete "+c.data.expenseToBeDeleted);
 		c.server.get({
 			action:'deleteExpense',
-			expenseId:expenseId
+			expenseId:c.data.expenseToBeDeleted
 		}).then(function(r){
 			spUtil.addInfoMessage(' Successfully deleted');
 		});
 	}
+	
+	c.deleteGroup = function(){
+		c.server.get({
+			action:'deleteGroup',
+			groupId:c.data.currentGroup.groupId
+		}).then(function(r){
+			spUtil.addInfoMessage(' Successfully deleted the group');
+		});
+	}
 
 	c.loadCurrentData =function(expense){
+		c.data.edit_create_label='Edit expense';
 		c.data.newexpense.name = expense.name;
 		c.data.newexpense.amount=expense.amount;
 		c.data.newexpense.share=expense.share;
@@ -302,11 +398,20 @@
 			name: 'groupMember'
 		};
 		c.data.newexpense.involvedMemebrs=expense.involvedMemebrs;
-		
-		c.data.oldexpense=c.data.newexpense;
-		c.data.oldexpense.expenseid=expense.sys_id;
+		c.data.newexpense.split_type_value=expense.split_type_value;
+
+		c.data.oldexpense=expense;
 		console.log(c.data.oldexpense);
 		c.data.expenseOp='edit';
+	}
+
+	c.clearPreviousEntries = function(){
+		c.data.edit_create_label='Add new expense';
+		c.data.newexpense={};
+		c.data.newexpense.split_type_value='Equally with everyone';
+	}
+	c.loadTeBeDeleted = function(exp){
+		c.data.expenseToBeDeleted=exp.sys_id;
 	}
 
 }
@@ -326,6 +431,11 @@
   color: #fff;
   text-shadow: 0 -1px 0 #318970;
 }
+.btn-edit{
+  background: blue;
+  color: #fff;
+  text-shadow: 0 -1px 0 #318970;
+}
 .button-container{
   margin-top: 2rem;
   margin-bottom: 1rem;
@@ -342,7 +452,7 @@
 }
 
 .new-group-container{
-  height: 25em;
+  //height: 25em;
 }
 
 .new-expense-container{
@@ -369,9 +479,35 @@
 }
 
 .edit-icon{
-  float: right;
   font-size: medium;
+  margin-left: 4em;
 }
+
+.dashboard-total{
+  border-right: dotted;
+  border-top: dotted;
+  margin-left: 15px;
+  width: 30%;
+}
+
+.dashboard-owed{
+  border-top: dotted;
+  width: 32%;
+
+}
+
+.dashboard-owe{
+
+  border-right: dotted;
+  border-top: dotted;
+  width: 35%;
+
+}
+
+.dashboard-header{
+  border: ridge;
+}
+
 </css>
         <data_table>sp_instance</data_table>
         <demo_data/>
@@ -390,6 +526,7 @@
 	//create an array to populate with notes
 	if (input && input.action) {
 		if (input.action == 'dashboard') {
+
 			data.totals = {};
 			var usergroup = new GlideRecord('x_881767_splitwise_user_group');
 			usergroup.addQuery('user.sys_id',gs.getUser().getID());
@@ -422,8 +559,10 @@
 			usergroup.addQuery('user.sys_id',gs.getUser().getID());
 			usergroup.addQuery('group',input.groupId);
 			usergroup.query();
+			console.log(" query "+input.groupId+" "+usergroup.getRowCount())
 			data.totals.group_balance = 0;
 			if(usergroup.next()){
+				console.log(" inside if of ussergrouyp query");
 				var balance = parseFloat(usergroup.getValue('balance'));
 				data.totals.group_balance=balance;
 				console.log('group balance is '+balance);
@@ -431,19 +570,20 @@
 
 		}
 		else if(input.action=='getGroupMembers'){
-			data.members= [];
+			//data.members= [];
 			data.nmembers=[];
 			var userRecord=new GlideRecord('x_881767_splitwise_user_group');
 			console.log(" group is "+input.groupId);
 			userRecord.addQuery('group.sys_id',input.groupId);
 			userRecord.query();
 			console.log("rows "+userRecord.getRowCount());
-	
+
 			while(userRecord.next()){
 				var member={};
 				member.name=userRecord.getDisplayValue('user');
 				member.sys_id=userRecord.getValue('user');
 				member.ug_id=userRecord.getValue('sys_id');
+				member.balance=userRecord.getValue('balance');
 				//console.log("user.user "+member.sys_id+" group.sys_id "+input.groupId)
 				//var noteGR = new GlideAggregate('x_881767_splitwise_user_expense');
 				//noteGR.addQuery('user.user',member.sys_id);
@@ -456,27 +596,27 @@
 				//member.totals.group_owe = 0;
 				//member.totals.group_owed = 0;
 				//while (noteGR.next()) {
-					//var spent=noteGR.getAggregate('SUM','spent');
-					//var share=noteGR.getAggregate('SUM','share');
-					//var balance = spent-share;
-					//member.totals.group_balance=member.totals.group_balance+balance;
-					//if(balance>0){
-						//member.totals.group_owed=member.totals.group_owed+balance;
-					//}else{
-						//member.totals.group_owe=member.totals.group_owe+balance;
+				//var spent=noteGR.getAggregate('SUM','spent');
+				//var share=noteGR.getAggregate('SUM','share');
+				//var balance = spent-share;
+				//member.totals.group_balance=member.totals.group_balance+balance;
+				//if(balance>0){
+				//member.totals.group_owed=member.totals.group_owed+balance;
+				//}else{
+				//member.totals.group_owe=member.totals.group_owe+balance;
 
-					//}
-					//console.log("spent "+spent+" share "+share+" balance "+balance+" note "+noteGR.group.group_name);
+				//}
+				//console.log("spent "+spent+" share "+share+" balance "+balance+" note "+noteGR.group.group_name);
 				//}
 				//data.members.push(member);
-				
+
 				var currentMemberData={};
 				currentMemberData.member=member;
 				var settlement=loadSettlementForCurrentUserAndGroup(member.sys_id,input.groupId);
 				currentMemberData.settlement=settlement;
 				data.nmembers.push(currentMemberData);
-				
-				
+
+
 			}
 			console.log("settlemeent details "+JSON.stringify(data.nmembers));
 		}
@@ -492,24 +632,26 @@
 				exp.amount=expGR.getValue('amount');
 				exp.paid_by=expGR.getDisplayValue('paid_by');
 				exp.paid_by_sys_id=expGR.getDisplayValue('paid_by.sys_id');
+				exp.split_type_value=expGR.getValue('split_type');
 				console.log('u_share_pair'+expGR.getValue('u_user_share_pair'));
 				exp.involvedMemebrs=expGR.getValue('u_user_share_pair');
-				if(expGR.getValue('u_user_share_pair').contains(input.userGroupId)){
-					var userExpGR=new GlideRecord('x_881767_splitwise_user_expense');
-					userExpGR.addQuery('expense.sys_id='+expGR.sys_id+'^user.sys_id='+input.userGroupId);
-					userExpGR.query();
-					if(userExpGR.next()){
-						var share=userExpGR.getValue('share');
-						if(expGR.getValue('paid_by')==input.userGroupId){
-							exp.myShare=exp.amount-share;	
-						}else{
-							exp.myShare=0-share;	
-						}
-
-					}
-				}else{
-					exp.myShare=0;
+				exp.myShare=0;
+				//if(expGR.getValue('u_user_share_pair').contains(input.userGroupId)){
+				var userExpGR=new GlideRecord('x_881767_splitwise_user_expense');
+				userExpGR.addQuery('expense.sys_id='+expGR.sys_id+'^user.sys_id='+input.userGroupId);
+				userExpGR.query();
+				if(userExpGR.next()){
+					//var share=userExpGR.getValue('share');
+					//if(expGR.getValue('paid_by')==input.userGroupId){
+					//exp.myShare=exp.amount-share;	
+					//}else{
+					//exp.myShare=0-share;	
+					//}
+					exp.myShare=userExpGR.getValue('u_balance');
+					console.log("paid by "+expGR.getValue('paid_by')+" ug id "+input.userGroupId );
 				}
+				//}
+
 				exp.date=expGR.getDisplayValue('sys_created_on').slice(0,10);
 				data.expenses.push(exp);
 			}
@@ -542,6 +684,31 @@
 			grp.insert();
 
 		}
+		else if(input.action=='editGroup'){
+			var grp=new GlideRecord('x_881767_splitwise_expense_group');
+			grp.addQuery('sys_id',input.groupId);
+			grp.query();
+			console.log(" expense group query "+grp.getRowCount());
+			if(grp.next()){
+				grp.setValue('group_name',input.name);	
+				grp.setValue('members',input.members);
+				grp.setValue('active',true);
+				grp.update();
+				console.log(" updated successfully with name "+input.name);
+			}
+		}
+		
+		else if(input.action=='deleteGroup'){
+			var grp=new GlideRecord('x_881767_splitwise_expense_group');
+			grp.addQuery('sys_id',input.groupId);
+			grp.query();
+			console.log(" expense group query "+grp.getRowCount());
+			if(grp.next()){
+				
+				grp.deleteRecord();
+				console.log(" Deleted the group successfully with name "+input.name);
+			}
+		}
 		else if(input.action=='createExpense'){
 
 			var newExpense=new GlideRecord('x_881767_splitwise_expense');
@@ -551,14 +718,15 @@
 			newExpense.setValue('u_name',expenseData.name);
 			newExpense.setValue('amount',amount);
 			newExpense.setValue('paid_by',expenseData.paid_by);
-			newExpense.setValue('group',input.groupId)
+			newExpense.setValue('group',input.groupId);
+			newExpense.setValue('split_type',input.splitOption);
 			var involved = [];
-			if(input.splitOption=='equally_with_everyone' && input.members){
+			if(input.splitOption=='Equally with everyone' && input.members){
 				for(var i=0;i<input.members.length;i++){
-					involved.push(input.members[i].ug_id);
+					involved.push(input.members[i].member.ug_id);
 				}
 			}else{
-				console.log(" before "+Object.keys(expenseData.shares)+" "+Object.keys(expenseData.shares));
+				//console.log(" before "+Object.keys(expenseData.shares)+" "+Object.keys(expenseData.shares));
 				for(var i=0;i<Object.keys(expenseData.shares).length;i++){
 					console.log("inside "+Object.keys(expenseData.shares)[i]);
 					involved.push(Object.keys(expenseData.shares)[i].split(",")[0]);
@@ -589,7 +757,7 @@
 			//}
 
 			//}
-			if(input.splitOption=='byShare'){
+			if(input.splitOption=='By exact share'){
 				//var each=amount/(Object.keys(expenseData.shares).length);
 				var isPayerInvolved = false;
 				for(var i=0;i<Object.keys(expenseData.shares).length;i++){
@@ -598,6 +766,7 @@
 					if(expenseData.paid_by==currentMember){
 						currentSpent=amount;
 						isPayerInvolved = true;
+						console.log("payer involved");
 					}
 					var share=expenseData.shares[Object.keys(expenseData.shares)[i].toString()];
 					if(share!=0){
@@ -606,11 +775,12 @@
 
 				}
 				if(!isPayerInvolved){
-					updateUserExpenseTable(expenseData.paid_by,response,0,currentSpent,input.groupId);
+					console.log(" updating payer details")
+					updateUserExpenseTable(expenseData.paid_by,response,0,amount,input.groupId);
 				}
 
 			}
-			else if(input.splitOption=='byPercentage'){
+			else if(input.splitOption=='By percentage'){
 				var isPayerInvolved = false;
 				for(var i=0;i<Object.keys(expenseData.shares).length;i++){
 					var currentMember=Object.keys(expenseData.shares)[i].split(",")[0];
@@ -623,7 +793,7 @@
 					updateUserExpenseTable(currentMember,response,share,currentSpent,input.groupId);
 				}
 				if(!isPayerInvolved){
-					updateUserExpenseTable(expenseData.paid_by,response,0,currentSpent,input.groupId);
+					updateUserExpenseTable(expenseData.paid_by,response,0,amount,input.groupId);
 				}
 			}
 
@@ -632,6 +802,9 @@
 		else if(input.action=='loadSettlement'){
 			data.mySettlement=[];
 			data.mySettlement = loadSettlementForCurrentUserAndGroup(gs.getUser().getID(),input.groupId)
+			if(data.mySettlement.length==0){
+				data.settlementMessage = " You are all settled!";
+			}
 		}
 		else if(input.action=='acceptPayment'){
 			var settle=new GlideRecord('x_881767_splitwise_settlement');
@@ -712,7 +885,7 @@
 			var expenseId=input.expenseId;
 			var involved = [];
 			//console.log(" before "+Object.keys(expenseData.shares)+" "+Object.keys(expenseData.shares));
-			if(input.splitOption=='equally_with_everyone' && input.members){
+			if(input.splitOption=='Equally with everyone' && input.members){
 				for(var i=0;i<input.members.length;i++){
 					involved.push(input.members[i].ug_id);
 				}
@@ -737,7 +910,7 @@
 
 			}
 
-			if(input.splitOption=='byShare' || input.splitOption=='byPercentage'){
+			if(input.splitOption=='By exact share' || input.splitOption=='By percentage'){
 				console.log("split type "+input.splitOption)
 				console.log(JSON.stringify(input));
 				var prev=input.oldexpense.involvedMemebrs.split(',');
@@ -758,7 +931,7 @@
 					}
 					var balancesData={};
 					var share = 0;
-					if(input.splitOption=='byPercentage'){
+					if(input.splitOption=='By percentage'){
 						share=((expenseData.shares[Object.keys(expenseData.shares)[i].toString()])*total)/100;
 					}else{
 						share=expenseData.shares[Object.keys(expenseData.shares)[i].toString()];
@@ -1041,6 +1214,7 @@
 				}
 			}
 		}
+		
 		return mySettlement;
 	}
 
@@ -1050,35 +1224,40 @@
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2022-09-23 18:04:16</sys_created_on>
         <sys_id>4279ecf647061510e292f2e7536d4342</sys_id>
-        <sys_mod_count>469</sys_mod_count>
+        <sys_mod_count>579</sys_mod_count>
         <sys_name>Splitwise Content</sys_name>
         <sys_package display_value="Splitwise" source="x_881767_splitwise">534b06d447021110e292f2e7536d438f</sys_package>
         <sys_policy/>
         <sys_scope display_value="Splitwise">534b06d447021110e292f2e7536d438f</sys_scope>
         <sys_update_name>sp_widget_4279ecf647061510e292f2e7536d4342</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2022-10-04 18:21:58</sys_updated_on>
+        <sys_updated_on>2022-10-10 17:44:13</sys_updated_on>
         <template><![CDATA[<div class="container-fluid">
   <div id="main-dashboard" class="row" ng-if="c.data.action=='dashboard'">
-    <div class="content-header">
+    <div class="dashboard-header">
       <h2 class="col-md-6">
         Dashboard  
       </h2>
+      <sp-widget widget="c.data.w2"></sp-widget>
+
       <div id="main-button-container" class="col-md-6 button-container">
         <a class="btn btn-large btn-orange " data-toggle="modal" href="#add-new-group">
           Add new group
         </a>
+        <a class="btn btn-large btn-mint "href="https://dev70031.service-now.com/$pa_dashboard.do?sysparm_dashboard=a2f0642647169150e292f2e7536d4312&sysparm_tab=d301a42647169150e292f2e7536d4339&sysparm_cancelable=true&sysparm_editable=true&sysparm_active_panel=quickLayoutSideContent" target="_blank" rel="noopener noreferrer">
+          View Dashboard
+        </a>
       </div>
       <hr/>
       <div class="row dashboard-totals" id="balance-container">
-        <div class="col-md-4 ">
+        <div class="col-md-4 dashboard-total">
           <h4>
             Your total 
           </h4><h5>
           {{c.data.balance}}
           </h5>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4 dashboard-owe">
           <h4>
             you owe 
           </h4>
@@ -1086,7 +1265,7 @@
             {{c.data.owe}}
           </h5>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4 dashboard-owed">
           <h4>
             You are owed 
           </h4>
@@ -1096,7 +1275,7 @@
         </div>
       </div>
     </div>
-    <div id="add-new-group" class="new-group-container modal fade modal-dialog modal-dialog-centered" tabindex="-1" aria-hidden="true" style="display: none;">
+    <div id="add-new-group" class="new-group-container modal fade modal-dialog " tabindex="-1" aria-hidden="true" style="display: none;">
       <div class="modal-dialog">
         <!-- Modal content-->
         <div class="modal-content">
@@ -1116,7 +1295,7 @@
                 <label>{{member.name}}</label>
                 <button type="button" class="close" ng-click="c.removeMember(member)">×</button>
               </div>
-              <sn-record-picker field="member" table="'sys_user'" display-field="'name'" value-field="'sys_id'" search-fields="'name'" page-size="100" ></sn-record-picker>
+              <sn-record-picker field="member" table="'sys_user'" default-query="c.data.getUsersByRoleQuery" display-field="'name'" value-field="'sys_id'" search-fields="'name'" page-size="100" ></sn-record-picker>
             </div>
           </div>
           <div class="modal-footer">
@@ -1126,6 +1305,7 @@
         </div>
       </div>
     </div>
+
   </div>
   <div id="all-groups" class="container" ng-if="c.data.action=='showGroupPage'">
     <div class="row">
@@ -1135,12 +1315,17 @@
             {{c.data.groupName}}  
           </h2>
           <div id="main-button-container" class="col-md-6 button-container">
-            <a class="btn btn-large btn-orange " data-toggle="modal" href="#add_expense">
+            <a class="btn btn-large btn-orange " data-toggle="modal" href="#add_expense" ng-click="c.clearPreviousEntries()">
               Add an expense
             </a>
             <a class="btn btn-large btn-mint" data-toggle="modal" href="#settle_up" ng-click="c.loadSettlement()">
               Settle up
             </a>
+            <a class="btn btn-large btn-edit" data-toggle="modal" href="#edit-new-group" ng-click="c.loadCurrentGroup()">
+              Modify Group
+            </a>
+
+
           </div>
           <hr/>
 
@@ -1169,7 +1354,7 @@
               <div class="modal-content">
                 <div class="modal-header">
                   <button type="button" class="close" data-dismiss="modal">&times;</button>
-                  <h4 class="modal-title">Add new expense</h4>
+                  <h4 class="modal-title">{{c.data.edit_create_label}}</h4>
                 </div>
                 <div class="modal-body">
                   <div class="form-group">
@@ -1179,7 +1364,7 @@
                     <input type="text" class="form-control" id="newExpenseAmount" ng-model="c.data.newexpense.amount" placeholder="0.00">
                     <label>Paid by </label>
                     <div>
-                      <sn-record-picker field="groupMember" default-query="c.data.getUsersByGroupQuery" table="'x_881767_splitwise_user_group'" display-field="'user.name'" value-field="'sys_id'" search-fields="'name'" page-size="100" ></sn-record-picker> 
+                      <sn-record-picker field="groupMember" default-query="c.data.getUsersByGroupQuery" table="'x_881767_splitwise_user_group'" display-field="'user.name'" value-field="'sys_id'" search-fields="'user.name'" page-size="100" ></sn-record-picker> 
                     </div>
 
                     <label>How do you want to split </label> 
@@ -1192,7 +1377,7 @@
                   </ul>
 
                 </div>-->
-                    <a href="#splitting_container" class="w3-bar-item w3-button" data-toggle="modal" ng-click="c.showSplitOption('equally_among_some','Equally') ">{{c.data.splitOption.name}}</a>
+                    <a href="#splitting_container" class="w3-bar-item w3-button" data-toggle="modal" ng-click="c.showSplitOption(c.data.newexpense.split_type_value) ">{{c.data.newexpense.split_type_value}}</a>
                   </div>
                 </div>
                 <div class="modal-footer">
@@ -1212,12 +1397,12 @@
                 </div>
                 <div class="modal-body">
                   <div class="form-group">
-                    <div class="all_settled" ng-if='c.data.settlementMessage!=null'>
+                    <div class="all_settled" ng-if='c.data.settlementMessage'>
                       <label class="all_settled-label"> {{c.data.settlementMessage}}</label>
                     </div>
                     <div class="payment" ng-repeat="settle in c.data.mySettlement track by $index">
                       <div ng-if="settle.type=='accept'">
-                        <label class="setllement"> <b>{{settle.from}}</b> paid you<b> {{settle.amount}} {{settle.settled}}</b><button type="button" class="btn btn-primary btn-settle" ng-click="c.acceptPayment(settle,$index)" ng-disabled="settle.settled==1">Accept</button></label>
+                        <label class="setllement"> <b>{{settle.from}}</b> paid you<b> {{settle.amount}}</b><button type="button" class="btn btn-primary btn-settle" ng-click="c.acceptPayment(settle,$index)" ng-disabled="settle.settled==1">Accept</button></label>
                       </div>
                       <div ng-if="settle.type=='pay'">
                         <label class="setllement"> Record Payment of {{settle.amount}} to {{settle.to}}<button type="button" class="btn btn-primary btn-settle" ng-click="c.recordPayment(settle,$index)" ng-disabled="settle.settled==1">Settle</button></label>
@@ -1231,7 +1416,56 @@
               </div>
             </div>
           </div>
-
+          <div id="edit-new-group" class="modal fade" tabindex="-1" aria-hidden="true" style="display: none;">
+            <div class="modal-dialog">
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">Modify group for your expense tracking</h4>
+                </div>
+                <div class="modal-body">
+                  <div class="form-group">
+                    <label for="groupName">Group Name:</label>
+                    <input type="text" class="form-control" id="newGroup" ng-model="c.data.currentGroup.name" placeholder="New Group">
+                  </div>
+                  <div clas="group-members form-group">
+                    <label for="members">Members: </label><br/>
+                    <div  ng-repeat="member in c.data.currentGroup.members">
+                      <label>{{member.name}}</label>
+                      <button type="button" class="close" ng-click="c.editMember(member)">×</button>
+                    </div>
+                    <sn-record-picker field="editedMember" table="'sys_user'" default-query="c.data.getUsersByRoleQuery" display-field="'name'" value-field="'sys_id'" search-fields="'name'" page-size="100" ></sn-record-picker>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                   <a class="btn btn-large btn-danger" data-toggle="modal" href="#delete_group" data-dismiss="modal">Delete</a>
+                  
+                  <button type="button" class="btn btn-primary" ng-click="c.editGroup()" data-dismiss="modal">Edit</button>
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="delete_group" class="splitting_container modal fade" tabindex="-1" aria-hidden="true" style="display:none">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Confirmation</h4>
+                      </div>
+                      <div class="modal-body">
+                        <h4>
+                          Delete the selected group?
+                        </h4>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="c.deleteGroup()">Delete</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
           <div id="splitting_container" class="splitting_container modal fade" tabindex="-1" aria-hidden="true" style="display:none">
             <div class="modal-dialog">
               <div class="modal-content">
@@ -1243,28 +1477,34 @@
                   <div class="form-group">
                     <ul class="nav nav-tabs">
                       <li class="nav-item">
-                        <a class="nav-link active"  ng-click="c.showSplitOption('equally_among_some','Equally')" aria-current="true">Equally</a>
+                        <a class="nav-link active"  href="#share-equally-options" ng-click="c.showSplitOption('Equally among some')" aria-current="true">Equally</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link" href="#by-amount-options" ng-click="c.showSplitOption('byShare','By Exact share')">By exact amount</a>
+                        <a class="nav-link" href="#by-amount-options" ng-click="c.showSplitOption('By exact share')">By exact amount</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link" href="#by-share-options" ng-click="c.showSplitOption('byPercentage','By Percentage share')">By percentage share</a>
+                        <a class="nav-link" href="#by-share-options" ng-click="c.showSplitOption('By percentage')">By percentage share</a>
                       </li>
                     </ul>
-                    <div id="by-amount-options" ng-repeat="member in c.data.members" ng-if="c.data.splitOption.value=='byShare'">
-                      <label for="newExpenseName" >{{member.name}} </label>
-                      <input type="text" class="form-control" id="userShare" ng-model="c.data.newexpense.shares[member.ug_id+','+member.sys_id]" placeholder="0.00">
+                    <div id="by-amount-options" ng-if="c.data.newexpense.split_type_value=='By exact share'">
+                      <div ng-repeat="memberData in c.data.nmembers" >
+                        <label for="newExpenseName" >{{memberData.member.name}} </label>
+                        <input type="text" class="form-control" id="userShare" ng-model="c.data.newexpense.shares[memberData.member.ug_id+','+memberData.member.sys_id]" placeholder="0.00" >
+                      </div>
                     </div>
-                    <div id="share-equally-options" ng-repeat="member in c.data.members" ng-if="c.data.splitOption.value=='equally_among_some'">
-                      <input class="form-check-input" type="checkbox" value="" ng-model="c.data.newexpense.shares[member.ug_id+','+member.sys_id]" id="flexCheckDefault" checked>
-                      <label class="form-check-label" for="flexCheckDefault">
-                        {{member.name}}
-                      </label>
+                    <div id="share-equally-options" ng-if="c.data.newexpense.split_type_value=='Equally among some' || c.data.newexpense.split_type_value=='Equally with everyone' ">
+                      <div ng-repeat="memberData in c.data.nmembers" >
+                        <input class="form-check-input" type="checkbox" value="" ng-model="c.data.newexpense.shares[memberData.member.ug_id+','+memberData.member.sys_id]" id="flexCheckDefault" >
+                        <label class="form-check-label" for="flexCheckDefault">
+                          {{memberData.member.name}}
+                        </label>
+                      </div>
                     </div>
-                    <div id="by-share-options" ng-repeat="member in c.data.members" ng-if="c.data.splitOption.value=='byPercentage'">
-                      <label for="newExpenseName" >{{member.name}} </label>
-                      <input type="text" class="form-control" id="userShare" ng-model="c.data.newexpense.shares[member.ug_id+','+member.sys_id]" placeholder="0.00%">
+                    <div id="by-share-options"  ng-if="c.data.newexpense.split_type_value=='By percentage'">
+                      <div ng-repeat="memberData in c.data.nmembers">
+                        <label for="newExpenseName" >{{memberData.member.name}} </label>
+                        <input type="text" class="form-control" id="userShare" ng-model="c.data.newexpense.shares[memberData.member.ug_id+','+memberData.member.sys_id]" placeholder="0.00%" >
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -1332,10 +1572,10 @@
                   </h5>
                 </div>
                 <div class="col-md-2"> <br>
-                  <button type="button" class="btn btn-default">
-                    <a href="#add_expense" data-toggle="modal" ng-click="c.loadCurrentData(exp)"><i class="fa fa-pencil edit-icon" ></i>Edit</a>
-                  </button>
-                  <a href="#delete_container" data-toggle="modal"><i class="fa fa-trash delete-icon" aria-hidden="true"></i> </a>
+
+                  <a href="#add_expense" data-toggle="modal" ng-click="c.loadCurrentData(exp,'Edit')"><i class="fa fa-pencil edit-icon" ></i></a>
+
+                  <a href="#delete_container" data-toggle="modal" ng-click="c.loadTeBeDeleted(exp)"><i class="fa fa-trash delete-icon" aria-hidden="true"></i> </a>
                 </div>
                 <div id="delete_container" class="splitting_container modal fade" tabindex="-1" aria-hidden="true" style="display:none">
                   <div class="modal-dialog">
@@ -1351,7 +1591,7 @@
                       </div>
                       <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal"ng-click="c.deleteExpense(exp.sys_id)">Delete</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="c.deleteExpense()">Delete</button>
                       </div>
                     </div>
                   </div>
@@ -1364,7 +1604,6 @@
         </div>
       </div>
       <div class="col-md-3">
-
 
 
         <div id="members-container" >

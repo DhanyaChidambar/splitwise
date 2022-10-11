@@ -44,8 +44,11 @@
         <reference_cascade_rule/>
         <reference_floats>false</reference_floats>
         <reference_key/>
-        <reference_qual/>
-        <reference_qual_condition/>
+        <reference_qual>roles=x_881767_splitwise.user^ORroles=x_881767_splitwise.admin^EQ</reference_qual>
+        <reference_qual_condition table="sys_user">roles=x_881767_splitwise.user^ORroles=x_881767_splitwise.admin^EQ<item endquery="false" field="roles" goto="false" newquery="false" operator="=" or="false" value="x_881767_splitwise.user"/>
+            <item endquery="false" field="roles" goto="false" newquery="false" operator="=" or="true" value="x_881767_splitwise.admin"/>
+            <item endquery="true" field="" goto="false" newquery="false" operator="=" or="false" value=""/>
+        </reference_qual_condition>
         <reference_type/>
         <sizeclass/>
         <spell_check>false</spell_check>
@@ -54,14 +57,14 @@
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2022-09-17 09:28:32</sys_created_on>
         <sys_id>0275b7a047061110e292f2e7536d43fc</sys_id>
-        <sys_mod_count>0</sys_mod_count>
+        <sys_mod_count>1</sys_mod_count>
         <sys_name>Members</sys_name>
         <sys_package display_value="Splitwise" source="x_881767_splitwise">534b06d447021110e292f2e7536d438f</sys_package>
         <sys_policy/>
         <sys_scope display_value="Splitwise">534b06d447021110e292f2e7536d438f</sys_scope>
         <sys_update_name>sys_dictionary_x_881767_splitwise_expense_group_members</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2022-09-17 09:28:32</sys_updated_on>
+        <sys_updated_on>2022-10-10 06:44:28</sys_updated_on>
         <table_reference>false</table_reference>
         <text_index>false</text_index>
         <unique>false</unique>

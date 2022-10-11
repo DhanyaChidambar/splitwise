@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ux_app_route">
+    <sys_ux_app_route action="INSERT_OR_UPDATE">
+        <app_config/>
+        <description/>
+        <fields/>
+        <icon/>
+        <name>Splitwise representations</name>
+        <optional_parameters/>
+        <order>0</order>
+        <parent_macroponent display_value="Dashboard viewport">3119f143532510102b54ddeeff7b126e</parent_macroponent>
+        <parent_macroponent_composition_element_id>PGx19X02X1991xXimVEbm9pPYokBTAyq5</parent_macroponent_composition_element_id>
+        <route_type>cl8v9c0ly002c3b73ifxvahac</route_type>
+        <screen_type display_value="Splitwise representations">a01008e247929150e292f2e7536d4348</screen_type>
+        <sys_class_name>sys_ux_app_route</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-10-05 06:40:37</sys_created_on>
+        <sys_id>ac1008e247929150e292f2e7536d4379</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Splitwise representations</sys_name>
+        <sys_package display_value="Splitwise" source="x_881767_splitwise">534b06d447021110e292f2e7536d438f</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Splitwise">534b06d447021110e292f2e7536d438f</sys_scope>
+        <sys_update_name>sys_ux_app_route_ac1008e247929150e292f2e7536d4379</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-10-05 06:40:37</sys_updated_on>
+    </sys_ux_app_route>
+    <sys_translated_text action="delete_multiple" query="documentkey=ac1008e247929150e292f2e7536d4379"/>
+</record_update>

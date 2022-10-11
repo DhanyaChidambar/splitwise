@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_instance">
+    <sp_instance action="DELETE">
+        <active>true</active>
+        <class_name/>
+        <color>default</color>
+        <css/>
+        <glyph/>
+        <id/>
+        <order>1</order>
+        <roles/>
+        <short_description/>
+        <size>md</size>
+        <sp_column display_value="1">bd15771a47529150e292f2e7536d433e</sp_column>
+        <sp_widget display_value="My Hello World 1">4097a39f47319110e292f2e7536d4339</sp_widget>
+        <sys_class_name>sp_instance</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-10-05 06:21:06</sys_created_on>
+        <sys_id>3a9bb3de47529150e292f2e7536d4378</sys_id>
+        <sys_mod_count>6</sys_mod_count>
+        <sys_name>Dashboard</sys_name>
+        <sys_package display_value="Splitwise" source="x_881767_splitwise">534b06d447021110e292f2e7536d438f</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Splitwise">534b06d447021110e292f2e7536d438f</sys_scope>
+        <sys_update_name>sp_instance_3a9bb3de47529150e292f2e7536d4378</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-10-05 07:10:16</sys_updated_on>
+        <title>Dashboard</title>
+        <url/>
+        <widget_parameters/>
+    </sp_instance>
+    <sys_translated_text action="DELETE" query="documentkey=3a9bb3de47529150e292f2e7536d4378"/>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Splitwise">534b06d447021110e292f2e7536d438f</application>
+        <file_path/>
+        <instance_id>f9468166dbbfd3808264f70fbf9619e4</instance_id>
+        <instance_name>dev70031</instance_name>
+        <name>sp_instance_3a9bb3de47529150e292f2e7536d4378</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_instance"><sp_instance action="INSERT_OR_UPDATE"><active>true</active><class_name/><color>default</color><css/><glyph/><id/><order>1</order><roles/><short_description/><size>md</size><sp_column display_value="1">bd15771a47529150e292f2e7536d433e</sp_column><sp_widget display_value="My Hello World 1">4097a39f47319110e292f2e7536d4339</sp_widget><sys_class_name>sp_instance</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2022-10-05 06:21:06</sys_created_on><sys_id>3a9bb3de47529150e292f2e7536d4378</sys_id><sys_mod_count>6</sys_mod_count><sys_name>Dashboard</sys_name><sys_package display_value="Splitwise" source="x_881767_splitwise">534b06d447021110e292f2e7536d438f</sys_package><sys_policy/><sys_scope display_value="Splitwise">534b06d447021110e292f2e7536d438f</sys_scope><sys_update_name>sp_instance_3a9bb3de47529150e292f2e7536d4378</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2022-10-05 07:10:16</sys_updated_on><title>Dashboard</title><url/><widget_parameters/></sp_instance><sys_translated_text action="delete_multiple" query="documentkey=3a9bb3de47529150e292f2e7536d4378"/></record_update>]]></payload>
+        <payload_hash>-1802006980</payload_hash>
+        <record_name>Dashboard</record_name>
+        <reverted_from/>
+        <source>66dff24547ce5110e292f2e7536d43e0</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-10-05 07:10:16</sys_created_on>
+        <sys_id>47d64caa47929150e292f2e7536d4358</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>183a6fb17240000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-10-05 07:10:16</sys_updated_on>
+        <type>Instance</type>
+        <update_guid>0fd64caacb929150647b2366cdb25657</update_guid>
+        <update_guid_history>0fd64caacb929150647b2366cdb25657:-1802006980,3addffde1f529150a5267ec1e60e5a6f:1028030741,164c3bde2652915031621c76faebf5ba:1428682866,533cf7de71529150ef0e57ceb2e6b79d:1043890588,4eebf7def6529150ed2a14be575d9a60:-2027092991,69bbb3de96529150fba61826c08fafa4:83210784,7e9bb3de775291503a3dd98eb91cda7a:1595185925</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete display_value="Dashboard">b3e604ea47929150e292f2e7536d4396</sys_audit_delete>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-10-05 07:10:36</sys_created_on>
+        <sys_db_object display_value="" name="sp_instance">sp_instance</sys_db_object>
+        <sys_id>0771b426ea4043768434c2ef4ddaf539</sys_id>
+        <sys_metadata>3a9bb3de47529150e292f2e7536d4378</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Dashboard</sys_name>
+        <sys_package display_value="Splitwise" source="x_881767_splitwise">534b06d447021110e292f2e7536d438f</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Splitwise">534b06d447021110e292f2e7536d438f</sys_scope>
+        <sys_scope_delete display_value="">18b1ccc3dfbf4b7d876f6c0d8952f371</sys_scope_delete>
+        <sys_update_name>sp_instance_3a9bb3de47529150e292f2e7536d4378</sys_update_name>
+        <sys_update_version display_value="sp_instance_3a9bb3de47529150e292f2e7536d4378">47d64caa47929150e292f2e7536d4358</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-10-05 07:10:36</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

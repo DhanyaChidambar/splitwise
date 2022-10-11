@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_instance">
+    <sp_instance action="DELETE">
+        <active>true</active>
+        <class_name/>
+        <color>default</color>
+        <css/>
+        <glyph/>
+        <id/>
+        <order>1</order>
+        <roles/>
+        <short_description/>
+        <size>md</size>
+        <sp_column display_value="1">bd15771a47529150e292f2e7536d433e</sp_column>
+        <sp_widget display_value="Report">e41aa2d29f0222008252baac757fcfce</sp_widget>
+        <sys_class_name>sp_instance</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-10-05 16:09:09</sys_created_on>
+        <sys_id>343202ee475a9150e292f2e7536d43a2</sys_id>
+        <sys_mod_count>5</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="Splitwise" source="x_881767_splitwise">534b06d447021110e292f2e7536d438f</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Splitwise">534b06d447021110e292f2e7536d438f</sys_scope>
+        <sys_update_name>sp_instance_343202ee475a9150e292f2e7536d43a2</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-10-05 17:09:28</sys_updated_on>
+        <title/>
+        <url/>
+        <widget_parameters><![CDATA[{
+	"report_id": {
+		"value": "8242682647169150e292f2e7536d43b1",
+		"displayValue": "Splitwise spending trend by group"
+	},
+	"show_title": {
+		"value": "true",
+		"displayValue": "true"
+	}
+}]]></widget_parameters>
+    </sp_instance>
+    <sys_translated_text action="DELETE" query="documentkey=343202ee475a9150e292f2e7536d43a2"/>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Splitwise">534b06d447021110e292f2e7536d438f</application>
+        <file_path/>
+        <instance_id>f9468166dbbfd3808264f70fbf9619e4</instance_id>
+        <instance_name>dev70031</instance_name>
+        <name>sp_instance_343202ee475a9150e292f2e7536d43a2</name>
+        <payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="sp_instance"&gt;&lt;sp_instance action="INSERT_OR_UPDATE"&gt;&lt;active&gt;true&lt;/active&gt;&lt;class_name/&gt;&lt;color&gt;default&lt;/color&gt;&lt;css/&gt;&lt;glyph/&gt;&lt;id/&gt;&lt;order&gt;1&lt;/order&gt;&lt;roles/&gt;&lt;short_description/&gt;&lt;size&gt;md&lt;/size&gt;&lt;sp_column display_value="1"&gt;bd15771a47529150e292f2e7536d433e&lt;/sp_column&gt;&lt;sp_widget display_value="Report"&gt;e41aa2d29f0222008252baac757fcfce&lt;/sp_widget&gt;&lt;sys_class_name&gt;sp_instance&lt;/sys_class_name&gt;&lt;sys_created_by&gt;admin&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2022-10-05 16:09:09&lt;/sys_created_on&gt;&lt;sys_id&gt;343202ee475a9150e292f2e7536d43a2&lt;/sys_id&gt;&lt;sys_mod_count&gt;5&lt;/sys_mod_count&gt;&lt;sys_name/&gt;&lt;sys_package display_value="Splitwise" source="x_881767_splitwise"&gt;534b06d447021110e292f2e7536d438f&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="Splitwise"&gt;534b06d447021110e292f2e7536d438f&lt;/sys_scope&gt;&lt;sys_update_name&gt;sp_instance_343202ee475a9150e292f2e7536d43a2&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;admin&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2022-10-05 17:09:28&lt;/sys_updated_on&gt;&lt;title/&gt;&lt;url/&gt;&lt;widget_parameters&gt;&lt;![CDATA[{
+	"report_id": {
+		"value": "8242682647169150e292f2e7536d43b1",
+		"displayValue": "Splitwise spending trend by group"
+	},
+	"show_title": {
+		"value": "true",
+		"displayValue": "true"
+	}
+}]]&gt;&lt;/widget_parameters&gt;&lt;/sp_instance&gt;&lt;sys_translated_text action="delete_multiple" query="documentkey=343202ee475a9150e292f2e7536d43a2"/&gt;&lt;/record_update&gt;</payload>
+        <payload_hash>-1111869080</payload_hash>
+        <record_name/>
+        <reverted_from/>
+        <source>66dff24547ce5110e292f2e7536d43e0</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-10-05 17:09:28</sys_created_on>
+        <sys_id>a400deea479a9150e292f2e7536d433d</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>183a91fac9e0000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-10-05 17:09:28</sys_updated_on>
+        <type>Instance</type>
+        <update_guid>ac00deeac59a9150bc5748450add683c</update_guid>
+        <update_guid_history>ac00deeac59a9150bc5748450add683c:-1111869080,beaf4aeaf79a915010510f6d1c91ab86:-413151668,d8be0aaaa79a91505853360c3a03359c:-1111869080,9ed646e29b9a9150b5285a2e96c910a1:-413151668,bf4282ee935a91500d466de2dbc7db55:-1111869080,703202ee375a9150f7ae35f5ccfec3a4:-1147438251</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete display_value="">cd9189f647521110e292f2e7536d43fd</sys_audit_delete>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-10-06 06:05:18</sys_created_on>
+        <sys_db_object display_value="" name="sp_instance">sp_instance</sys_db_object>
+        <sys_id>54b6bef15984427092d91038dcdfcae4</sys_id>
+        <sys_metadata>343202ee475a9150e292f2e7536d43a2</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="Splitwise" source="x_881767_splitwise">534b06d447021110e292f2e7536d438f</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Splitwise">534b06d447021110e292f2e7536d438f</sys_scope>
+        <sys_scope_delete display_value="">18b1ccc3dfbf4b7d876f6c0d8952f371</sys_scope_delete>
+        <sys_update_name>sp_instance_343202ee475a9150e292f2e7536d43a2</sys_update_name>
+        <sys_update_version display_value="sp_instance_343202ee475a9150e292f2e7536d43a2">a400deea479a9150e292f2e7536d433d</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-10-06 06:05:18</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>
