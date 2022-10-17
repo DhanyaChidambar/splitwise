@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_app_module">
     <sys_app_module action="INSERT_OR_UPDATE">
-        <active>false</active>
+        <active>true</active>
         <application display_value="Splitwise">773d465847021110e292f2e7536d43b4</application>
         <assessment/>
         <device_type/>
@@ -26,7 +26,7 @@
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>0bdf548947465110e292f2e7536d43d0</sys_id>
-        <sys_mod_count>3</sys_mod_count>
+        <sys_mod_count>4</sys_mod_count>
         <sys_name>Expenses</sys_name>
         <sys_overrides/>
         <sys_package display_value="Splitwise" source="x_881767_splitwise">534b06d447021110e292f2e7536d438f</sys_package>
@@ -34,7 +34,7 @@
         <sys_scope display_value="Splitwise">534b06d447021110e292f2e7536d438f</sys_scope>
         <sys_update_name>sys_app_module_0bdf548947465110e292f2e7536d43d0</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2022-10-10 03:40:39</sys_updated_on>
+        <sys_updated_on>2022-10-11 10:45:04</sys_updated_on>
         <timeline_page/>
         <title>Expenses</title>
         <uncancelable>false</uncancelable>
