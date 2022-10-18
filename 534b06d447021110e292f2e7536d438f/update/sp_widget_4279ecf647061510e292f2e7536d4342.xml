@@ -13,6 +13,7 @@
 	c.data.showActions = false;
 	c.data.oldexpense = {};
 	c.data.expenseOp='';
+	c.data.getUsersByRoleQuery='roles=x_881767_splitwise.user^ORroles=x_881767_splitwise.admin';
 
 
 	$scope.member = {
@@ -131,7 +132,7 @@
 
 	$rootScope.$on('openDashboard',function(event,data){
 		c.data.action="dashboard";
-		c.data.getUsersByRoleQuery='roles=x_881767_splitwise.user^ORroles=x_881767_splitwise.admin';
+
 		displayDashBoard(data);
 	});
 	$rootScope.$on('showGroupPage',function(event,data){
@@ -243,25 +244,55 @@
 	c.createExpense = function(){
 		console.log('group id '+c.data.groupId+' '+c.data.members);
 		if(c.data.oldexpense.amount!=c.data.newexpense.amount
-			 && c.data.newexpense.split_type_value!='Equally with everyone' ){
+			 && c.data.newexpense.split_type_value!='Equally with everyone' && c.data.newexpense.split_type_value!='Equally among some' ){
 			if(!c.data.newexpense.shares){
 				spUtil.addErrorMessage(" Update the share accordingly");
 				return;
 			}
 		}
+		if(c.data.newexpense.shares && Object.keys(c.data.newexpense.shares).length!=0){
+			if(c.data.newexpense.split_type_value=='Equally among some'){
+				if(Object.keys(c.data.newexpense.shares).length==0){
+					spUtil.addErrorMessage(" At least one user must be part of the expense, add members involved");
+					return;
+				}
 
-		if(c.data.newexpense.split_type_value=='Equally among some'){
-			if(Object.keys(c.data.newexpense.shares).length==0){
-				spUtil.addErrorMessage(" At least one user must be part of the expense, add members involved");
-				return;
 			}
+			else if(c.data.newexpense.split_type_value=='By exact share'){
+				var total=0;
+				for(var i=0;i<Object.keys(c.data.newexpense.shares).length;i++){
+					if(c.data.newexpense.shares[Object.keys(c.data.newexpense.shares)[i]]){
+						total=parseFloat(total)+parseFloat(c.data.newexpense.shares[Object.keys(c.data.newexpense.shares)[i]]);
+					}
+
+				}
+				if(total!=c.data.newexpense.amount){
+					spUtil.addErrorMessage(" Total of shares do not sum up to the amount spent, please modify accordingly");
+					return;
+				}
+
+			}
+			else if(c.data.newexpense.split_type_value=='By percentage'){
+				var total=0;
+				for(var i=0;i<Object.keys(c.data.newexpense.shares).length;i++){
+					if(c.data.newexpense.shares[Object.keys(c.data.newexpense.shares)[i]]){
+						total=total+parseFloat(c.data.newexpense.shares[Object.keys(c.data.newexpense.shares)[i]]);	
+					}
+
+				}
+				if(total!=100){
+					spUtil.addErrorMessage(" Total % shares do not sum up to the amount spent, please modify accordingly");
+					return;
+				}
+			}	
+
 
 		}
-		else if(c.data.newexpense.split_type_value=='By exact share'){
+		else if(c.data.oldexpense.shares && Object.keys(c.data.oldexpense.shares).length!=0 && c.data.newexpense.split_type_value!='Equally among some'){
 			var total=0;
-			for(var i=0;i<Object.keys(c.data.newexpense.shares).length;i++){
-				if(c.data.newexpense.shares[Object.keys(c.data.newexpense.shares)[i]]){
-					total=parseFloat(total)+parseFloat(c.data.newexpense.shares[Object.keys(c.data.newexpense.shares)[i]]);
+			for(var i=0;i<Object.keys(c.data.oldexpense.shares).length;i++){
+				if(c.data.oldexpense.shares[Object.keys(c.data.oldexpense.shares)[i]]){
+					total=parseFloat(total)+parseFloat(c.data.oldexpense.shares[Object.keys(c.data.oldexpense.shares)[i]]);
 				}
 
 			}
@@ -271,20 +302,6 @@
 			}
 
 		}
-		else if(c.data.newexpense.split_type_value=='By percentage'){
-			var total=0;
-			for(var i=0;i<Object.keys(c.data.newexpense.shares).length;i++){
-				if(c.data.newexpense.shares[Object.keys(c.data.newexpense.shares)[i]]){
-					total=total+parseFloat(c.data.newexpense.shares[Object.keys(c.data.newexpense.shares)[i]]);	
-				}
-
-			}
-			if(total!=100){
-				spUtil.addErrorMessage(" Total % shares do not sum up to the amount spent, please modify accordingly");
-				return;
-			}
-		}	
-
 
 		if(c.data.expenseOp=='edit'){
 			c.server.get({
@@ -412,7 +429,13 @@
 	c.clearPreviousEntries = function(){
 		c.data.edit_create_label='Add new expense';
 		c.data.newexpense={};
+		c.data.oldexpense={};
 		c.data.newexpense.split_type_value='Equally with everyone';
+		$scope.groupMember = {
+			displayValue: null,
+			value: null,
+			name: 'groupMember'
+		};
 	}
 	c.loadTeBeDeleted = function(exp){
 		c.data.expenseToBeDeleted=exp.sys_id;
@@ -642,23 +665,34 @@
 				console.log('u_share_pair'+expGR.getValue('u_user_share_pair'));
 				exp.involvedMemebrs=expGR.getValue('u_user_share_pair');
 				exp.myShare=0;
+				var shares={};
+				exp.shares ={};
 				//if(expGR.getValue('u_user_share_pair').contains(input.userGroupId)){
 				var userExpGR=new GlideRecord('x_881767_splitwise_user_expense');
-				userExpGR.addQuery('expense.sys_id='+expGR.sys_id+'^user.sys_id='+input.userGroupId);
+				//userExpGR.addQuery('expense.sys_id='+expGR.sys_id+'^user.sys_id='+input.userGroupId);
+				userExpGR.addQuery('expense',expGR.sys_id);
+
 				userExpGR.query();
-				if(userExpGR.next()){
+				console.log(" expense "+expGR.sys_id+" "+userExpGR.getRowCount());
+				while(userExpGR.next()){
 					//var share=userExpGR.getValue('share');
 					//if(expGR.getValue('paid_by')==input.userGroupId){
 					//exp.myShare=exp.amount-share;	
 					//}else{
 					//exp.myShare=0-share;	
 					//}
-					exp.myShare=userExpGR.getValue('u_balance');
-					console.log("paid by "+expGR.getValue('paid_by')+" ug id "+input.userGroupId );
+					console.log(" inside the loop "+userExpGR.getValue('user')+','+userExpGR.user.user);
+					if(userExpGR.getValue('user')==input.userGroupId){
+						exp.myShare=userExpGR.getValue('u_balance');	
+					}
+					var key=userExpGR.getValue('user')+','+userExpGR.user.user;
+					shares[key]=userExpGR.getValue('share');
+					console.log("shares "+shares+ " "+shares.length);
 				}
 				//}
 
 				exp.date=expGR.getDisplayValue('sys_created_on').slice(0,10);
+				exp.shares=shares;
 				data.expenses.push(exp);
 			}
 			console.log("expenses "+data.expenses+' '+input.groupId+" "+input.userGroupId);
@@ -893,13 +927,30 @@
 			//console.log(" before "+Object.keys(expenseData.shares)+" "+Object.keys(expenseData.shares));
 			if(input.splitOption=='Equally with everyone' && input.members){
 				for(var i=0;i<input.members.length;i++){
-					involved.push(input.members[i].ug_id);
+					involved.push(input.members[i].member.ug_id);
 				}
-			}else{
-				for(var i=0;i<Object.keys(expenseData.shares).length;i++){
-					console.log("inside "+Object.keys(expenseData.shares)[i]);
-					involved.push(Object.keys(expenseData.shares)[i].split(",")[0]);
+			}
+			else{
+				var shares={};
+				if(expenseData.shares && Object.keys(expenseData.shares).length>0){
+					shares=expenseData.shares;
+					console.log(" shares now "+shares);
+					for(var i=0;i<Object.keys(shares).length;i++){
+						console.log("inside "+Object.keys(shares)[i]);
+						involved.push(Object.keys(shares)[i].split(",")[0]);
+					}
+				}else{
+					shares=input.oldexpense.shares;
+					console.log(" shares old "+shares);
+					for(var i=0;i<Object.keys(shares).length;i++){
+						console.log("inside "+Object.keys(shares)[i]);
+						if(shares[Object.keys(shares)[i]]!=0){
+							involved.push(Object.keys(shares)[i].split(",")[0]);	
+						}
+
+					}
 				}
+
 			}
 			console.log(" involved new "+involved);
 			var expenseGR=new GlideRecord('x_881767_splitwise_expense');
@@ -915,8 +966,9 @@
 				console.log(" Expense "+ expenseId+ "updated ");
 
 			}
+			console.log(" condition "+expenseData.shares +" "+ Object.keys(expenseData.shares).length);
 
-			if(input.splitOption=='By exact share' || input.splitOption=='By percentage'){
+			if((input.newexpense.shares && Object.keys(input.newexpense.shares).length!=0) && (input.splitOption=='By exact share' || input.splitOption=='By percentage')){
 				console.log("split type "+input.splitOption)
 				console.log(JSON.stringify(input));
 				var prev=input.oldexpense.involvedMemebrs.split(',');
@@ -1230,14 +1282,14 @@
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2022-09-23 18:04:16</sys_created_on>
         <sys_id>4279ecf647061510e292f2e7536d4342</sys_id>
-        <sys_mod_count>589</sys_mod_count>
+        <sys_mod_count>621</sys_mod_count>
         <sys_name>Splitwise Content</sys_name>
         <sys_package display_value="Splitwise" source="x_881767_splitwise">534b06d447021110e292f2e7536d438f</sys_package>
         <sys_policy/>
         <sys_scope display_value="Splitwise">534b06d447021110e292f2e7536d438f</sys_scope>
         <sys_update_name>sp_widget_4279ecf647061510e292f2e7536d4342</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2022-10-13 10:31:07</sys_updated_on>
+        <sys_updated_on>2022-10-18 06:43:32</sys_updated_on>
         <template><![CDATA[<div class="container-fluid">
   <div id="main-dashboard" class="row" ng-if="c.data.action=='dashboard'">
     <div class="dashboard-header">
